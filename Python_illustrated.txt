@@ -1,0 +1,5 @@
+Python illustrated
+==================
+:doctype: book
+
+include::Python_illustrated_part1.txt[]
