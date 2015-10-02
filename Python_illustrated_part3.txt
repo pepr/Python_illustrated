@@ -1,23 +1,16 @@
+== Part 3
 
-<h1>Python illustrated (part 3)</h1>
+[verse]
+"The time has come," the Walrus said, "To
+talk of many things:
+Of sets--and lists--and dictionaries--
+Of variable kinks--
+And why you see it changing not--
+And why so strange are strings."
 
-<p class=MsoNormal><a href="http://www.experts-exchange.com/members/pepr.html"
-target="_blank"><span style='text-decoration:none'><img border=0 width=48
-height=48 id="Obrázek 31" src="Python_illustrated_soubory/image001.png"
-alt="http://cdn.experts-exchange.com/files/3b14e350-1b90-4c69-a50a-698defc33aa9.png"></span></a>Approved
-Article by <a href="http://www.experts-exchange.com/members/pepr.html">pepr</a>
-On 2011-08-29 Views: 3,502 11,302 Points </p>
-
-<p class=MsoNormal>"The time has come," the Walrus said, "To
-talk of many things:<br>
-Of sets--and lists--and dictionaries--<br>
-Of variable kinks--<br>
-And why you see it changing not--<br>
-And why so strange are strings." </p>
-
-<p class=MsoNormal>This part describes how variables and references (see parts
-1 and 2) fit with Python, and how the <i>clearly strange</i> behaviour is not
-that strange when you know <i>only a little bit more</i> about the Python
+This part describes how variables and references (see <<part1, part 1>>
+and <<part2, part 2>>) fit with Python, and how the _clearly strange_ behaviour is not
+that strange when you know _only a little bit more_ about the Python
 internals.  Some people may say: "Hey, they are not Python basics at
 all!"  The reality is that not having that little tiny bit of Python
 knowledge you will once stand schocked, with open mouth, staring at the
@@ -25,34 +18,30 @@ behaviour of your program. Especially when you ARE a programmer (used to a
 compiled language).
 
 If you find anything less understandable about variables and references in this
-article, have a look at <a
-href="http://www.experts-exchange.com/Programming/Languages/Scripting/Python/A_6589-Python-basics-illustrated-part-2.html"
-target="_blank">Python illustrated (part 2)</a>.  Also, your feedback is
+article, have a look at
+<<part2, Python illustrated (part 2)>>.  Also, your feedback is
 warmly welcome.  It will form the problems illustrated in part 4.
 
-<br>
-  </p>
 
-<h2>Summary for Python variables/objects</h2>
+=== Summary for Python variables/objects
 
-<p class=MsoNormal><br>
 You may not like to read a lot of "theory" first, and you may want to
 search where the conclusion is.  "Does it make sense for me to read
 further?"  Good news for you -- the summary from Python point of view
 comes first:
 
-1. Everything in Python is an object. Any object has its unique <i>technical</i>
+1. Everything in Python is an object. Any object has its unique _technical_
 identification (the memory address).  The information about its type is
 kept inside the object.
 
 2. The simplest objects are few constants, numeric values, and strings.
  They are also stored as objects which means they have their own
 identification.  Once they are created, they cannot change their content.
- They are <i>immutable</i>.
+ They are _immutable_.
 
 3. More-complex built-in objects are lists, tuples, dictionaries, and sets.
- They contain only <i>references</i> to other objects, not the objects
-itself.  Let's call them <i>containers</i> (as it is usual also in other
+ They contain only _references_ to other objects, not the objects
+itself.  Let's call them _containers_ (as it is usual also in other
 languages).  The references are untyped.  The type is bound to the
 target object.
 
@@ -65,15 +54,15 @@ the assignment (counted by the target object).
 Python dictionary structures. The reference to the value object is the value of
 the dictionary item.
 
-<br>
+
 Now slowly, with pictures.
 
   </p>
 
 <h2>Everything in Python is an object</h2>
 
-<p class=MsoNormal><br>
-Objects are not <i>the new thing</i> these days any more.  Objects as
+<p class=MsoNormal>
+Objects are not _the new thing_ these days any more.  Objects as
 instances of their classes can be found everywhere.  Is there anything
 special about them in Python?
 
@@ -85,17 +74,17 @@ and 2) it must be accessible via at least one reference. (Nothing very special.)
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489370/01PythonObjectsIdType.png"
 title=""Identification and the type of the object. (4 KB)" t "><span
-style='text-decoration:none'><img border=0 width=534 height=182 id="Obrázek 30"
+style='text-decoration:none'><img border=0 width=534 height=182 id="ObrÃ¡zek 30"
 src="Python_illustrated_soubory/image014.png"
 alt="Identification and the type of the object."></span></a></p>
 
 <h2>Simplest Python objects</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The very basic objects in Python are boolean values (True, False), numeric
 values (int, float, complex), strings (plus some more).
 
-The <i>most natural simple things in any programming language</i> are integer
+The _most natural simple things in any programming language_ are integer
 values and integer variables.  It is so natural that you can hardly
 imagine how the integer value could be expressed better than by simply typing
 the textual representation of the number in the source file.  What does it
@@ -112,15 +101,15 @@ without arguments in you console window) and try the following:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-1"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489371/02IntegerObjectExample.png"
 title=""Example of the integer object. (6 KB)" t "><span
-style='text-decoration:none'><img border=0 width=586 height=230 id="Obrázek 29"
+style='text-decoration:none'><img border=0 width=586 height=230 id="ObrÃ¡zek 29"
 src="Python_illustrated_soubory/image015.jpg"
 alt="Example of the integer object."></span></a>Notice that simply typing <b>1</b>
 in the source code leads to the creation of the object that represents the
-value.  Looking better at the lines above, the <i>id()</i> function
+value.  Looking better at the lines above, the _id()_ function
 returns always the same identification independently on how you have got the
 value.  Then it must mean that all the cases share the same object of the
 integer type with the value 1.  This is a kind of optimization that does
@@ -136,7 +125,7 @@ values, separate objects are created. Try (or read and believe) the following:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-2"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Here the identifications are the same.  But try it with bigger numbers:
 
  </p>
@@ -147,7 +136,7 @@ Here the identifications are the same.  But try it with bigger numbers:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-3"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The identifications now differ.  The internal optimization was not used
 for the case.
 
@@ -161,7 +150,7 @@ target="_blank">http://www.laurentluce.com/posts/python-integer-objects-implemen
 
 <h2>A note about the type</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Actually, the instance of the object (its memory footprint) should be as small
 as possible. This means that the object itself should not store all details
 common for all instances of the same class.  In other words, it should NOT
@@ -172,12 +161,12 @@ like this...
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489373/03SeparatedTypeObject.png"
 title=""A separated type object. (8 KB)" t "><span style='text-decoration:
-none'><img border=0 width=564 height=240 id="Obrázek 28"
+none'><img border=0 width=564 height=240 id="ObrÃ¡zek 28"
 src="Python_illustrated_soubory/image016.jpg" alt="A separated type object."></span></a></p>
 
-<p class=MsoNormal>There is another built-in function named <i>type()</i> in
+<p class=MsoNormal>There is another built-in function named _type()_ in
 Python.  The documentation says that it that returns the reference to the
-related <i>type-object</i>.  When displaying the object, we can see the
+related _type-object_.  When displaying the object, we can see the
 string like...
 
  </p>
@@ -188,11 +177,11 @@ string like...
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-4"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The text speaks for itself.  But, hey, "... returns the reference to
-the related <i>type-object</i>"?  Is the type object really
+the related _type-object_"?  Is the type object really
 separated?  If yes, it must be possible to get its identification and
-type. Let's apply the earlier <i>id()</i> function to the type object:
+type. Let's apply the earlier _id()_ function to the type object:
 
  </p>
 
@@ -202,7 +191,7 @@ type. Let's apply the earlier <i>id()</i> function to the type object:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-5"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Well, the type objects seems to be separated. (It has its own identification.)
 Then, what is the type of that type object?
 
@@ -214,25 +203,25 @@ Then, what is the type of that type object?
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-6"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489374/04IntWithTypeObject.png"
 title=""The integer object with the separated type object. (10 KB)" t "><span
-style='text-decoration:none'><img border=0 width=570 height=232 id="Obrázek 27"
+style='text-decoration:none'><img border=0 width=570 height=232 id="ObrÃ¡zek 27"
 src="Python_illustrated_soubory/image017.jpg"
 alt="The integer object with the separated type object."></span></a></p>
 
 <p class=MsoNormal>Are you confused?  If yes, then don't worry.  You
-will get used to.  If it is too difficult for you now, think in terms <i>the
-type is bound to the object</i> that represents the value.
+will get used to.  If it is too difficult for you now, think in terms _the
+type is bound to the object_ that represents the value.
 
   </p>
 
 <h2>Some other simple Python objects/types</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 They are boolean constants, float numbers, complex numbers, and strings.
- There is also a special type and the constant named <i>None</i>:
+ There is also a special type and the constant named _None_:
 
  </p>
 
@@ -246,7 +235,7 @@ target="_blank">Open in new window</a></p>
 
 <h2>Values of objects of the simple types can never be changed!</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 When working with objects in various programming languages, it is usual to
 think about the object as about a data space bound to some functionality (the
 methods).  It is very usual to think about them as about
@@ -283,29 +272,29 @@ in the sense of time/space complexity of operations.
 
 <h2>Built-in containers</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The more-complex built-in types of objects are lists, tuples, dictionaries, and
-sets.  They are designed to <i>contain</i> other objects.  Because of
-that we call them <i>containers</i> (as it is usual also in other programming
+sets.  They are designed to _contain_ other objects.  Because of
+that we call them _containers_ (as it is usual also in other programming
 languages).
 
 A list allows you to store and update a sequence of other objects (the order is
 preserved).  Tuple-type objecs are similar to lists, but they cannot be
-modified after creation. A dictionary stores pairs <i>key, value</i> where the
-key is used to access the value part (i.e. associative access; also known as a <i>map</i>
-or a <i>hash table</i>).  A set allows you to capture a set of objects.
+modified after creation. A dictionary stores pairs _key, value_ where the
+key is used to access the value part (i.e. associative access; also known as a _map_
+or a _hash table_).  A set allows you to capture a set of objects.
 Sets can be tested, modified and otherwise manipulated using operations that
 are known from the set theory (mathematics).
 
 It is extremely important for understanding how Python works, that all
-container objects always contain only the <i>references</i> to the objects
+container objects always contain only the _references_ to the objects
 representing the values.
 
   </p>
 
 <h2>Tuples and lists</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Tuples came from mathematics.  They contain certain number of elements in
 some order. A single tuple in Python can contain elements of more types.
 
@@ -317,13 +306,13 @@ some order. A single tuple in Python can contain elements of more types.
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-8"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Now, how should we imagine the tuple object?  How it looks inside?
 
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489376/05TupleExample.png"
 title=""Example of a tuple object. (15 KB)" t "><span
-style='text-decoration:none'><img border=0 width=621 height=423 id="Obrázek 26"
+style='text-decoration:none'><img border=0 width=621 height=423 id="ObrÃ¡zek 26"
 src="Python_illustrated_soubory/image018.jpg" alt="Example of a tuple object."></span></a>Surprised?
  The tuple object does not contain the elements inside.  The element
 objects are located outside, and they are bound to the tuple object only via
@@ -333,13 +322,13 @@ stores the array of references of fixed size.  It means that the tuple
 object with three elements has always the same memory footprint -- it uses the
 same amount of memory independently on how big are the element objects.
 
-References in Python are always untyped -- they are references to <i>any type</i>.
- This means that the element of a tuple can be the object of <i>any
-type/class</i>.
+References in Python are always untyped -- they are references to _any type_.
+ This means that the element of a tuple can be the object of _any
+type/class_.
 
 There is one important thing to be mentioned.  The tuple object cannot be
 changed after it was created.  This means that its value is constant.
- What does it <i>really</i> mean?  The static array of references cannot
+ What does it _really_ mean?  The static array of references cannot
 be changed.  If the refered element objects are also constant, then the
 logical value of the tuple remains the same "forever".
 
@@ -353,13 +342,13 @@ What about lists?
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-9"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 How can we imagine the list object?
 
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489377/06ListExample.png"
 title=""Example of a list object. (21 KB)" t "><span
-style='text-decoration:none'><img border=0 width=550 height=546 id="Obrázek 25"
+style='text-decoration:none'><img border=0 width=550 height=546 id="ObrÃ¡zek 25"
 src="Python_illustrated_soubory/image019.jpg" alt="Example of a list object."></span></a></p>
 
 <p class=MsoNormal>The list object is very similar to the tuple objects.
@@ -373,9 +362,9 @@ object with the given identity can change completely during its lifetime.
 
 So far, I tried to avoid using the variable names.  Why? It will be clear
 at the end of this part.  Anyway, it is neccessary to use the variable now
-for demonstration of the difference between the list and the tuple.  The <i>lst</i>
+for demonstration of the difference between the list and the tuple.  The _lst_
 variable was assigned the list object.  The same variable can be used
-later to call the <i>append()</i> method of the object.  The list object
+later to call the _append()_ method of the object.  The list object
 gets one more element (it becomes bigger; see the dashed-line parts of the
 above image).
 
@@ -393,16 +382,16 @@ When trying to do the same with the tuple object...
 
  </p>
 
-<pre><code>&gt;&gt;&gt; t = (1, 'some string', 3.5)</code></pre><pre><code>&gt;&gt;&gt; t</code></pre><pre><code>(1, 'some string', 3.5)</code></pre><pre><code>&gt;&gt;&gt; t.append(True)</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>AttributeError: 'tuple' object has no attribute 'append'</code></pre>
+<pre><code>&gt;&gt;&gt; t = (1, 'some string', 3.5)</code></pre><pre><code>&gt;&gt;&gt; t</code></pre><pre><code>(1, 'some string', 3.5)</code></pre><pre><code>&gt;&gt;&gt; t.append(True)</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>Â  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>AttributeError: 'tuple' object has no attribute 'append'</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-11"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
-... not only that the tuple class does not define the <i>append()</i> method,
+<p class=MsoNormal>
+... not only that the tuple class does not define the _append()_ method,
 but there is also no other way to modify the tuple.  You can think about
-the tuple object as about some <i>frozen list</i>.  The references inside
+the tuple object as about some _frozen list_.  The references inside
 the object cannot be assigned.  Also, the array of the references cannot
 grow.  There will always be three and only the three references inside, in
 this case.
@@ -424,10 +413,10 @@ objects if it is apparent.)
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-12"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
-The list object referenced by the <i>lst</i> variable was included as the
+<p class=MsoNormal>
+The list object referenced by the _lst_ variable was included as the
 fourth element of the tuple. (It is a different tuple than in the earlier
-example.  It has four elements now.)  But the <i>lst</i> variable is
+example.  It has four elements now.)  But the _lst_ variable is
 still available, and it can be used to call the method of the referenced list
 object:
 
@@ -439,7 +428,7 @@ object:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-13"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The list object changed.  What about the tuple that you may consider to be
 independent on the situation?
 
@@ -451,7 +440,7 @@ independent on the situation?
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-14"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Ooops!  The tuple is different now!  And they say the tuple cannot be
 changed!  And this is true.  The tuple object value did not change
 because the references in the internal array are the same.  However, there
@@ -461,7 +450,7 @@ representation.  The image explains it better:
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489379/07TupleWithListElement.png"
 title=""A tuple with a list element. (25 KB)" t "><span
-style='text-decoration:none'><img border=0 width=586 height=812 id="Obrázek 24"
+style='text-decoration:none'><img border=0 width=586 height=812 id="ObrÃ¡zek 24"
 src="Python_illustrated_soubory/image020.jpg" alt="A tuple with a list element."></span></a></p>
 
 <p class=MsoNormal>If you payed attention, you may ask: "Where is the
@@ -476,7 +465,7 @@ sharing of the <b>1</b> object?"  We can check the identifications
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-15"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Notice that both the list and the tuple can be indexed (zero based) as if they
 were arrays.  Now you already know why!  It comes almost for free in
 the Python language, because both tuples and lists store the array of
@@ -493,7 +482,7 @@ the image should look like that:
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489380/08TupleWithListElementOptimized.png"
 title=""The tuple with the list element -- optimized. (25 KB)" t "><span
-style='text-decoration:none'><img border=0 width=600 height=799 id="Obrázek 23"
+style='text-decoration:none'><img border=0 width=600 height=799 id="ObrÃ¡zek 23"
 src="Python_illustrated_soubory/image021.jpg"
 alt="The tuple with the list element -- optimized."></span></a>The most
 important conclusion so far is that containers always contain references to the
@@ -508,9 +497,9 @@ independently on how complex are the element objects.
 
 <h2>Sets</h2>
 
-<p class=MsoNormal><br>
-The documentation says: "A <i>set</i> object is an unordered collection of
-distinct <i>hashable</i> objects."  Unlike a tuple of a list object,
+<p class=MsoNormal>
+The documentation says: "A _set_ object is an unordered collection of
+distinct _hashable_ objects."  Unlike a tuple of a list object,
 a set object does not capture the order of collected elements.  Try the
 following:
 
@@ -522,10 +511,10 @@ following:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-16"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Well, the strange syntax... The set type was added in Python version 2.4, which
 means quite late.  Actually, the above code does not use any special
-syntax.  You can even (re)define the <i>class set</i> that would be used
+syntax.  You can even (re)define the _class set_ that would be used
 the same way.  As we need to pass some initial elements when the object is
 created, we need some other container that contains them.  The authors of
 Python prefer a list.  However, you can pass also other iterable objects.
@@ -539,7 +528,7 @@ Python prefer a list.  However, you can pass also other iterable objects.
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-17"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 As for other types, if possible, the representation of the object has the form
 that could be copy/pasted to a source file to get the object with the same
 content.  Even though we passed a tuple, the representation shows the list
@@ -562,7 +551,7 @@ instead:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-18"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 "OK! Now I know how Python set work internally!"  Well, there
 are some kinks that you would not expect.  You may want to create the set
 like this:
@@ -570,7 +559,7 @@ like this:
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489408/09SetObjectExampleKink.png"
 title=""The set object can be kinky ;) (24 KB)" t "><span
-style='text-decoration:none'><img border=0 width=571 height=510 id="Obrázek 22"
+style='text-decoration:none'><img border=0 width=571 height=510 id="ObrÃ¡zek 22"
 src="Python_illustrated_soubory/image022.jpg"
 alt="The set object can be kinky ;)"></span></a></p>
 
@@ -584,20 +573,20 @@ alt="The set object can be kinky ;)"></span></a></p>
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-19"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 "Oops! Where is my <b>True</b>?"  Well, this may be quite
 surprising.  To explain that behaviour, we have to talk about hash values.
  Probably the simplest way to demonstrate is to use the built-in function
-named...<br>
+named...
   </p>
 
 <h2>hash()</h2>
 
-<p class=MsoNormal><br>
-The <i>hash(arg)</i> built-in function returns so called <i>hash value</i> of the
+<p class=MsoNormal>
+The _hash(arg)_ built-in function returns so called _hash value_ of the
 passed argument.
 
-Where the name <i>hash</i> came from... Do you now that food made of chopped
+Where the name _hash_ came from... Do you now that food made of chopped
 meat?  Even when the resul looks differently than the raw meat, you can
 still guess that it was made of meat.  When you chop some vegetables, the
 result will look differently.  But if you chop another portion of the same
@@ -607,7 +596,7 @@ if it belongs to the chopped meat or to the chopped vegetable.  You can
 decide using the small sample, even though the samples differ from the
 originals.  
 
-The <i>hash()</i> function does the same with the object passed as the
+The _hash()_ function does the same with the object passed as the
 argument.  The sample has the form of an integer number.  When you
 get the same number, the source was somehow ekvivalent. Try:
 
@@ -619,19 +608,19 @@ get the same number, the source was somehow ekvivalent. Try:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-20"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 You can see that it always return some integer value.  However, not every
-object is <i>hashable</i>.  Try:
+object is _hashable_.  Try:
 
  </p>
 
-<pre><code>&gt;&gt;&gt; hash([1, 2, 3])</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>TypeError: unhashable type: 'list'</code></pre>
+<pre><code>&gt;&gt;&gt; hash([1, 2, 3])</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>Â  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>TypeError: unhashable type: 'list'</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-21"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 In this case, the list is not hashable because it can change its content.
  This means that the next time the object would return a different hash
 number.  Because of this, the concrete hash number cannot always represent
@@ -643,7 +632,7 @@ hash of the object.
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489383/10hashAsColour.png"
 title=""Illustration of hash values. (7 KB)" t "><span
-style='text-decoration:none'><img border=0 width=618 height=214 id="Obrázek 21"
+style='text-decoration:none'><img border=0 width=618 height=214 id="ObrÃ¡zek 21"
 src="Python_illustrated_soubory/image023.jpg" alt="Illustration of hash values."></span></a>Now
 back to the set type.  The set always contains one value only once.
  In other words, it contains unique values.  On the other hand, the
@@ -651,7 +640,7 @@ set in Python can be used as a container for objects of different types.
  We need some general mean to decide whether the object is inside the set
 or not.  Here comes the hash value of the object.
 
-When testing whether the object is inside the set or not, we calculate <i>hash(obj)</i>
+When testing whether the object is inside the set or not, we calculate _hash(obj)_
 first.  Then we can check, whether the object with the same hash value is
 inside.  The hash function has also one important feature.  It can be
 easily transformed to the index of an array element.  When being lucky,
@@ -665,7 +654,7 @@ than the number of elements to minimize the conflicts.
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489384/11SetHashAndUniqueness.png"
 title=""A set, hash, and how the uniqueness of values is implemented. (14 KB)" t "><span
-style='text-decoration:none'><img border=0 width=552 height=446 id="Obrázek 20"
+style='text-decoration:none'><img border=0 width=552 height=446 id="ObrÃ¡zek 20"
 src="Python_illustrated_soubory/image024.jpg"
 alt="A set, hash, and how the uniqueness of values is implemented."></span></a>However,
 there is one kink with Python hash values.  Sometimes, different objects
@@ -679,19 +668,19 @@ may have the same hash value:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-22"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489385/12sameHash.png"
 title=""Objects with the same hash value. (8 KB)" t "><span
-style='text-decoration:none'><img border=0 width=583 height=196 id="Obrázek 19"
+style='text-decoration:none'><img border=0 width=583 height=196 id="ObrÃ¡zek 19"
 src="Python_illustrated_soubory/image025.jpg"
-alt="Objects with the same hash value."></span></a>This is the reason, why the <i>True</i>
+alt="Objects with the same hash value."></span></a>This is the reason, why the _True_
 was not inserted into the set in the earlier example.  When searching for
 the index in the internal array, the hash value of the True object was already
 found at the index.  The insertion algorithm decides only based on the
-hash value, even though the object present in the set represents the <i>1</i>
+hash value, even though the object present in the set represents the _1_
 (of the integer type).  Because of that simplification, Python interpreter
-decided not to insert <i>object with the same value</i> again. There are always
+decided not to insert _object with the same value_ again. There are always
 some tradeoffs when you look deep enough.  Everywhere.
 
 A final note related to hashability.  An object of the same type can be
@@ -699,13 +688,13 @@ sometimes hashable and sometimes not.  For example a tuple object:
 
  </p>
 
-<pre><code>&gt;&gt;&gt; type( (1, 'some string', 3.5) )</code></pre><pre><code>&lt;type 'tuple'&gt;</code></pre><pre><code>&gt;&gt;&gt; hash( (1, 'some string', 3.5) )</code></pre><pre><code>1562160248</code></pre><pre><code>&gt;&gt;&gt; type( (1, 'some string', 3.5, []) )</code></pre><pre><code>&lt;type 'tuple'&gt;</code></pre><pre><code>&gt;&gt;&gt; hash( (1, 'some string', 3.5, []) )</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>TypeError: unhashable type: 'list'</code></pre>
+<pre><code>&gt;&gt;&gt; type( (1, 'some string', 3.5) )</code></pre><pre><code>&lt;type 'tuple'&gt;</code></pre><pre><code>&gt;&gt;&gt; hash( (1, 'some string', 3.5) )</code></pre><pre><code>1562160248</code></pre><pre><code>&gt;&gt;&gt; type( (1, 'some string', 3.5, []) )</code></pre><pre><code>&lt;type 'tuple'&gt;</code></pre><pre><code>&gt;&gt;&gt; hash( (1, 'some string', 3.5, []) )</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>Â  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>TypeError: unhashable type: 'list'</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-23"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 If the tuple contains only hashable items, then the whole tuple is hashable.
  This means that we can get the number that can be used as a signature of
 the object.  However, when the tuple contains a list, it is not hashable
@@ -716,13 +705,13 @@ and there is no fixed number that could represent the tuple content.
 
 <h2>Mutable and immutable... What does it mean?</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 When reading the Python documentation or articles, you will definitely find the
-terms <i>mutable</i> or <i>immutable</i>.  Fancy words, simple meaning.
+terms _mutable_ or _immutable_.  Fancy words, simple meaning.
  A mutable object can be changed (its content) during lifetime.  An
 immutable object cannot change its content after it was created.  In other
-words, immutable means <i>with the constant content</i>, mutable means <i>with
-the content that can be modified</i>.  But remember, that the content of
+words, immutable means _with the constant content_, mutable means _with
+the content that can be modified_.  But remember, that the content of
 the container is the array of references.  If the container is immutable
 (e.g. of the tuple type), then only the references are constant.  Some or
 all of the refered objects may still be mutable.
@@ -730,37 +719,37 @@ all of the refered objects may still be mutable.
 So, what are the immutable types that we have mentioned so far?  All
 simple built-in types are immutable: integer, float, complex, string.  The
 tuple type is immutable.  There is also the immutable version of the set
-type.  The type is called <i>frozenset</i>.
+type.  The type is called _frozenset_.
 
 Why so much about hashability and mutability?  We will use that term
 later.  There is one type heavily used in Python as another type that is
-based on hashing.  The type is named <i>dict</i>.
+based on hashing.  The type is named _dict_.
 
   </p>
 
 <h2>Dictionaries</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Dictionary type is one of the major data types in Python.  It must be
-implemented very efficiently not only because <i>you</i> want to use it, but
+implemented very efficiently not only because _you_ want to use it, but
 also because the Python interpreter uses it even when you are not looking.
 
-What the doc says about the dictionary type...<br>
+What the doc says about the dictionary type...
  </p>
 
-<p class=MsoNormal>A <i>mapping</i> object maps hashable values to arbitrary
+<p class=MsoNormal>A _mapping_ object maps hashable values to arbitrary
 objects. Mappings are mutable objects. There is currently only one standard
 mapping type, the dictionary. [...]
 
-A dictionary’s keys are almost arbitrary values. Values that are not hashable
+A dictionaryâ€™s keys are almost arbitrary values. Values that are not hashable
 [...] may not be used as keys. Numeric types used for keys obey the normal
 rules for numeric comparison: if two numbers compare equal (such as 1 and 1.0)
 then they can be used interchangeably to index the same dictionary entry. </p>
 
 <p class=MsoNormal>As for the mentioned numeric types for keys, we already know
 why it is so.  This is because the hash value of the keys plays the role
-when accessing the items of a dictionary.  If you understand the above <i>set</i>
-type, it will not be difficult to understand the <i>dict</i> type for you.
+when accessing the items of a dictionary.  If you understand the above _set_
+type, it will not be difficult to understand the _dict_ type for you.
  
 
  </p>
@@ -771,11 +760,11 @@ type, it will not be difficult to understand the <i>dict</i> type for you.
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-24"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 A dictionary object can be created the same way as any other object -- via
-calling the class name as if it were a function (see the <i>dict()</i>).
+calling the class name as if it were a function (see the _dict()_).
  (You may prefer to name this as "using the class constructor",
-but there area some differences in Python, and it does not define the term <i>constructor</i>
+but there area some differences in Python, and it does not define the term _constructor_
 explicitly.
 
 However, there is also a special syntax for creating a dictionary object in
@@ -796,7 +785,7 @@ of the dictionary explicitly in the source code.
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-25"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Notice that the representation of the just created dictionary has the same
 form.  Notice where the spaces are placed and where they are not.
  This may be a minor issue.  Still, keeping the style helps to make
@@ -820,8 +809,8 @@ that is used for initialization:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-26"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
-The <i>dict()</i> constructor is capable to consume whatever sequence of
+<p class=MsoNormal>
+The _dict()_ constructor is capable to consume whatever sequence of
 tuples.  This means that it can be a tuple of tuples instead of the list
 of tuples.  It can also be set of tuples.  The rule is that the
 dictionary initialize have to be able iterate through the items and then the
@@ -835,7 +824,7 @@ item must contain two ordered elements -- the key and the value:
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-27"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Notice a kind of strange example that shows a tuple of strings with two
 characters.  It also meets the rules.  The two-char string is split
 to two chars.  The first one is used as the key, the other as the value.
@@ -850,18 +839,18 @@ for any meaningful usage of the case.)
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-28"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 A dictionary works as an associative array.  Therefore the syntax directly
 reflects the idea.  You can use a key value as if it was an index.
  You can read the existing value, and you can assign both the existing
 item (i.e. modification) or the new item (i.e. creation).  We can also
-delete an element using the <i>del</i> statement.  (We need the variable
+delete an element using the _del_ statement.  (We need the variable
 name for that.  The variables will be explained a bit later, as said
 earlier.)
 
  </p>
 
-<pre><code>&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}</code></pre><pre><code>&gt;&gt;&gt; d['a']</code></pre><pre><code>1</code></pre><pre><code>&gt;&gt;&gt; d['bb']</code></pre><pre><code>'some string'</code></pre><pre><code>&gt;&gt;&gt; d[5]</code></pre><pre><code>3.5</code></pre><pre><code>&gt;&gt;&gt; d['xxx']</code></pre><pre><code>True</code></pre><pre><code>&gt;&gt;&gt; d[0]</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>KeyError: 0</code></pre><pre><code>&gt;&gt;&gt; d[0] = 'new string'</code></pre><pre><code>&gt;&gt;&gt; d[0]</code></pre><pre><code>'new string'</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 0: 'new string', 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre><pre><code>&gt;&gt;&gt; del d[0]</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
+<pre><code>&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}</code></pre><pre><code>&gt;&gt;&gt; d['a']</code></pre><pre><code>1</code></pre><pre><code>&gt;&gt;&gt; d['bb']</code></pre><pre><code>'some string'</code></pre><pre><code>&gt;&gt;&gt; d[5]</code></pre><pre><code>3.5</code></pre><pre><code>&gt;&gt;&gt; d['xxx']</code></pre><pre><code>True</code></pre><pre><code>&gt;&gt;&gt; d[0]</code></pre><pre><code>Traceback (most recent call last):</code></pre><pre><code>Â  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</code></pre><pre><code>KeyError: 0</code></pre><pre><code>&gt;&gt;&gt; d[0] = 'new string'</code></pre><pre><code>&gt;&gt;&gt; d[0]</code></pre><pre><code>'new string'</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 0: 'new string', 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre><pre><code>&gt;&gt;&gt; del d[0]</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-29"
@@ -871,13 +860,13 @@ target="_blank">Open in new window</a></p>
 
 <h2>Dictionary illustrated</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 The time has come to have a look inside.
 
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489386/13dict.png"
 title=""A dictionary internals. (25 KB)" t "><span style='text-decoration:
-none'><img border=0 width=573 height=578 id="Obrázek 18"
+none'><img border=0 width=573 height=578 id="ObrÃ¡zek 18"
 src="Python_illustrated_soubory/image026.jpg" alt="A dictionary internals."></span></a>There
 is plenty of objects here.  However, keep in mind that the dictionary
 contains only references to them.  Whatever you do with the dictionary,
@@ -898,12 +887,12 @@ detais at <a
 href="http://www.laurentluce.com/posts/python-dictionary-implementation/"
 target="_blank">http://www.laurentluce.com/posts/python-dictionary-implementation/</a>.
 
-<br>
+
   </p>
 
 <h2>Variables</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Now it comes.  What really are the variables in Python?  Variables in
 Python are named references.  The name is stored in memory during runtime.
  It is not lost during compilation as in classical compiled languages.
@@ -918,14 +907,14 @@ are at the value side of that dictionary.
 
 Actually, the hidden dictionaries are not that hidden.  There are
 functions that gives you the access to the dictionaries.  One of them is
-the built-in function named <i>globals()</i>.
+the built-in function named _globals()_.
 
 Start the Python interpreter in interactive mode from scratch and try the
 following:
 
  </p>
 
-<pre><code>Python 2.7.1 (r271:86832, Nov 27 2010, 17:19:03) [MSC v.1500 64 bit (AMD64)] on win32</code></pre><pre><code>Type "help", "copyright", "credits" or "license" for more information.</code></pre><pre><code>&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre><pre><code>&gt;&gt;&gt; var1 = 4</code></pre><pre><code>&gt;&gt;&gt; var2 = 'whatever string'</code></pre><pre><code>&gt;&gt;&gt; var3 = False</code></pre><pre><code>&gt;&gt;&gt; g = globals()</code></pre><pre><code>&gt;&gt;&gt; type(g)</code></pre><pre><code>&lt;type 'dict'&gt;</code></pre><pre><code>&gt;&gt;&gt; g</code></pre><pre><code>{'var1': 4, </code></pre><pre><code> 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}, </code></pre><pre><code> 'var3': False, </code></pre><pre><code> 'var2': 'whatever string', </code></pre><pre><code> '__builtins__': &lt;module '__builtin__' (built-in)&gt;, </code></pre><pre><code> '__package__': None, </code></pre><pre><code> 'g': {...}, </code></pre><pre><code> '__name__': '__main__', </code></pre><pre><code> '__doc__': None}</code></pre>
+<pre><code>Python 2.7.1 (r271:86832, Nov 27 2010, 17:19:03) [MSC v.1500 64 bit (AMD64)] on win32</code></pre><pre><code>Type "help", "copyright", "credits" or "license" for more information.</code></pre><pre><code>&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}</code></pre><pre><code>&gt;&gt;&gt; d</code></pre><pre><code>{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre><pre><code>&gt;&gt;&gt; var1 = 4</code></pre><pre><code>&gt;&gt;&gt; var2 = 'whatever string'</code></pre><pre><code>&gt;&gt;&gt; var3 = False</code></pre><pre><code>&gt;&gt;&gt; g = globals()</code></pre><pre><code>&gt;&gt;&gt; type(g)</code></pre><pre><code>&lt;type 'dict'&gt;</code></pre><pre><code>&gt;&gt;&gt; g</code></pre><pre><code>{'var1': 4, </code></pre><pre><code>Â 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}, </code></pre><pre><code>Â 'var3': False, </code></pre><pre><code>Â 'var2': 'whatever string', </code></pre><pre><code>Â '__builtins__': &lt;module '__builtin__' (built-in)&gt;, </code></pre><pre><code>Â '__package__': None, </code></pre><pre><code>Â 'g': {...}, </code></pre><pre><code>Â '__name__': '__main__', </code></pre><pre><code>Â '__doc__': None}</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-30"
@@ -933,20 +922,20 @@ target="_blank">Open in new window</a></p>
 
 <p class=MsoNormal>
 
-Notice the last variable named <i>g</i>, that was assigned the result of the <i>globals()</i>.
- Next, we have tried it is of the <i>dict</i> type.  In other words,
+Notice the last variable named _g_, that was assigned the result of the _globals()_.
+ Next, we have tried it is of the _dict_ type.  In other words,
 it is a normal dictionary, indistinguishable from other dictionary objects.
  When displaying its representation, we can see all the defined variables
 inside, plus some more.  (The dictionary representation was manually
 formatted to make the dictionary items more visible.)
 
-Notice that even the <i>g</i> name is inside.  But its value cannot be
+Notice that even the _g_ name is inside.  But its value cannot be
 easily represented as it points to itself.  Let's illustrate it!
 
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489388/14globals.png"
 title=""Variables are implemented via system-dictionary objects. (34 KB)" t "><span
-style='text-decoration:none'><img border=0 width=601 height=835 id="Obrázek 17"
+style='text-decoration:none'><img border=0 width=601 height=835 id="ObrÃ¡zek 17"
 src="Python_illustrated_soubory/image027.jpg"
 alt="Variables are implemented via system-dictionary objects."></span></a>The reason
 for using the dark yellow colour of the object is to emphasize that they were
@@ -956,12 +945,12 @@ the object are quite normal objects of their type.
 There are some restictions for identifiers in any programming language. They
 usually must be compound of letters, numerals, and some special characters
 (e.g. undercore).  To make it short, the keys in the hidden dictionary
-must be of the string type.<br>
+must be of the string type.
   </p>
 
 <h2>Assignment operation</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Now it should be clear that the assignment to a variable means that the string
 form of its name is or found in the appropriate internal dictionary as a key,
 or the item for the key is created.  The assigned value is always some
@@ -972,22 +961,22 @@ dictionary.
 
 <h2>More variables</h2>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 What about the dirty idea to create dynamically a variable that was not given
 its identifier in the source code.  Say, its name could be dynamically
 created, read from a text file or whatever.  Here we simulate it by
-assigning the <i>s</i> variable.
+assigning the _s_ variable.
 
  </p>
 
-<pre><code>&gt;&gt;&gt; s = 'myVariable'</code></pre><pre><code>&gt;&gt;&gt; g[s] = 12345</code></pre><pre><code>&gt;&gt;&gt; g</code></pre><pre><code>{'var1': 1, </code></pre><pre><code> 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}, </code></pre><pre><code> 'var3': False, </code></pre><pre><code> 'var2': 'whatever string', </code></pre><pre><code> '__builtins__': &lt;module '__builtin__' (built-in)&gt;,</code></pre><pre><code> '__package__': None, </code></pre><pre><code> 'myVariable': 12345, </code></pre><pre><code> 'g': {...}, </code></pre><pre><code> 's': 'myVariable',</code></pre><pre><code> '__name__': '__main__', </code></pre><pre><code> '__doc__': None}</code></pre>
+<pre><code>&gt;&gt;&gt; s = 'myVariable'</code></pre><pre><code>&gt;&gt;&gt; g[s] = 12345</code></pre><pre><code>&gt;&gt;&gt; g</code></pre><pre><code>{'var1': 1, </code></pre><pre><code>Â 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}, </code></pre><pre><code>Â 'var3': False, </code></pre><pre><code>Â 'var2': 'whatever string', </code></pre><pre><code>Â '__builtins__': &lt;module '__builtin__' (built-in)&gt;,</code></pre><pre><code> '__package__': None, </code></pre><pre><code>Â 'myVariable': 12345, </code></pre><pre><code>Â 'g': {...}, </code></pre><pre><code>Â 's': 'myVariable',</code></pre><pre><code> '__name__': '__main__', </code></pre><pre><code>Â '__doc__': None}</code></pre>
 
 <p class=buttons><a
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-31"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
-See, the <i>myVariable</i> with the content 12345 is there!  Can we use
+<p class=MsoNormal>
+See, the _myVariable_ with the content 12345 is there!  Can we use
 the newly created variable name as if it was defined in the source text?
 
  </p>
@@ -998,26 +987,26 @@ the newly created variable name as if it was defined in the source text?
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-32"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 It works!  Notice that it is very different in programming languages to
 write an identifier and write a string literal with the same name inside.
 
-Warning: the <i>globals()</i> name suggests that it stores global variables.
- However, the dictionary stores only top-level variables <i>inside a
-module</i>.  There is that many of such dictionaries, how many modules is
-used in your program.  There also is the built-in <i>locals()</i> function
+Warning: the _globals()_ name suggests that it stores global variables.
+ However, the dictionary stores only top-level variables _inside a
+module_.  There is that many of such dictionaries, how many modules is
+used in your program.  There also is the built-in _locals()_ function
 that returns the dictionary of local variables.  However, you should never
 modify it.
 
 The above illustration shows how variables are implemented in Python.
  However, it looks quite complex on its own.  To simplify the
 illustration of used variables, I will use pictures like the following.
- It illustrates the same case -- except the <i>g</i> variable.
+ It illustrates the same case -- except the _g_ variable.
 
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489391/15variablesSimplified.png"
 title=""Illustration of variables -- simplification. (19 KB)" t "><span
-style='text-decoration:none'><img border=0 width=621 height=357 id="Obrázek 16"
+style='text-decoration:none'><img border=0 width=621 height=357 id="ObrÃ¡zek 16"
 src="Python_illustrated_soubory/image028.jpg"
 alt="Illustration of variables -- simplification."></span></a>  </p>
 
@@ -1028,7 +1017,7 @@ alt="Illustration of variables -- simplification."></span></a>  </p>
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'>"And
 why you see it changing not-- And why so strange are strings." </p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 "Oh, now I know! Assigning a variable means sharing the object via another
 reference..."
 
@@ -1040,11 +1029,11 @@ reference..."
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-33"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489668/16sharedList.png"
 title=""The list object is mutable. (20 KB)" t "><span
-style='text-decoration:none'><img border=0 width=617 height=518 id="Obrázek 15"
+style='text-decoration:none'><img border=0 width=617 height=518 id="ObrÃ¡zek 15"
 src="Python_illustrated_soubory/image029.png" alt="The list object is mutable."></span></a>"Oh,
 yes.  I have told you!"  What about this?
 
@@ -1056,7 +1045,7 @@ yes.  I have told you!"  What about this?
 href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-7109-34"
 target="_blank">Open in new window</a></p>
 
-<p class=MsoNormal><br>
+<p class=MsoNormal>
 Why the list object behaves as expected (when knowing we work via references),
 and why the string behaves so strangely?  Is there any exception?  Do
 string variables also use references to the string object?  Aren't they
@@ -1065,30 +1054,30 @@ implemented somehow differently?
 <a
 href="http://filedb.experts-exchange.com/incoming/2011/08_w34/489670/17modifySharedString.png"
 title=""Strings are immutable. (27 KB)" t "><span style='text-decoration:
-none'><img border=0 width=615 height=645 id="Obrázek 14"
+none'><img border=0 width=615 height=645 id="ObrÃ¡zek 14"
 src="Python_illustrated_soubory/image030.jpg" alt="Strings are immutable."></span></a>I
 hope it is the "Aha!" problem for you.  The key difference is
-that the list objects are mutable.  This means that the <i>.append()</i>
+that the list objects are mutable.  This means that the _.append()_
 method is able to modify the same object.  However, strings are immutable.
  The concatenation operator (+) cannot modify the original string object.
- The string object with the value <i>' extended'</i> must be created
+ The string object with the value _' extended'_ must be created
 first, then the + operator puts the values of the two strings together and
-creates another string object.  Only after that the <i>s2</i> variable is
-assigned the reference to the newly created object.  Therefore the <i>s1</i>
-and <i>s2</i> cannot point to the same object.  (The string object with
-the value <i>' extended'</i> exists only temporarily.  It is not
+creates another string object.  Only after that the _s2_ variable is
+assigned the reference to the newly created object.  Therefore the _s1_
+and _s2_ cannot point to the same object.  (The string object with
+the value _' extended'_ exists only temporarily.  It is not
 referenced later, and it will be destroyed by the garbage collector.)
 
-If you want to learn more about implementation of strings, see<br>
+If you want to learn more about implementation of strings, see
 <a href="http://www.laurentluce.com/posts/python-string-objects-implementation/"
 target="_blank">http://www.laurentluce.com/posts/python-string-objects-implementation/</a>.
 
 (The end of the part 3)
 
-<br>
----------------------------------------------------<br>
-Part 4 will reflect your questions...<br>
-+ some consequences of the above,<br>
+
+---------------------------------------------------
+Part 4 will reflect your questions...
++ some consequences of the above,
 + user defined classes.</p>
 
 </div>

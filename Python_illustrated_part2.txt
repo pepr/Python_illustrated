@@ -1,27 +1,18 @@
+[[part2]]
+== Part 2
 
-<h1><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman","serif"'><br>
- </span>Python illustrated (part 2)</h1>
+=== Less strange, but still introduction
 
-<p class=MsoNormal><a href="http://www.experts-exchange.com/members/pepr.html"
-target="_blank"><span style='text-decoration:none'><img border=0 width=48
-height=48 id="Obrázek 13" src="Python_illustrated_soubory/image001.png"
-alt="http://cdn.experts-exchange.com/files/3b14e350-1b90-4c69-a50a-698defc33aa9.png"></span></a>Awarded
-Article by <a href="http://www.experts-exchange.com/members/pepr.html">pepr</a>
-On 2011-08-29 Views: 3,167  12,867 Points </p>
-
-<h2>Less strange, but still introduction</h2>
-
-<p class=MsoNormal><br>
 This introduction was added (1st August, 2011) to reflect some reactions.
- Firstly, the term <i>basics</i> in the title of the article...  As
+Firstly, the term _basics_ in the title of the article...  As
 any other word, it is a symbol with meaning attached to the word by some
 agreement.  Still, we always have to think in some context to understand
 the agreement.  You may say that what is described in this and previous
-articles is not related to <i>Python basics</i> at all.  It could be
+articles is not related to _Python basics_ at all.  It could be
 because you expect a text written in some context that you met when reading
-some other "basics".  The article series could be renamed to <i>Python
-foundation</i> or <i>Python internals</i>.  However, the later terms are <i>more
-technical</i>, and I do not think it would help you to understand what I want
+some other "basics".  The article series could be renamed to _Python
+foundation_ or _Python internals_.  However, the later terms are _more
+technical_, and I do not think it would help you to understand what I want
 to write about.  Instead, I am asking you to change the context of
 thinking about it.  Tutorials often start with the simplest example that
 shows a working program (say "Hello, World!" -- it is also a kind of
@@ -36,8 +27,7 @@ articles with disagreement. ("Not related to Python at all!")
  In the same time I believe, that the information will be useful for those
 who find some knowledge gaps when reading the next part 3.
 
-The previous part 1 (<a
-href="http://http:A_5354-Python-basics-illustrated-part-1.html" target="_blank">http:A_5354-Python-basics-illustrated-part-1.html</a>)
+The previous <<part1, part 1>>
 explained where the term "variable" came from, how we can think about
 it, what it represents, how the variables are related to mathematics on one
 side, and to computers on the other side.  This part (2) is focused on
@@ -49,64 +39,55 @@ For explaining principles of working with variables, we need some excursion
 outside the Python point of view.  This part describes variables in
 context of traditional compiled languages to show some details.  Let's
 talk about pointers and references.  Good understanding will be necessary
-to swallow the part 3.<br>
- </p>
+to swallow the part 3.
+Â 
 
-<h2>Variables in the (old) compiled languages</h2>
+=== Variables in the (old) compiled languages
 
-<p class=MsoNormal><br>
-Let's think about the equation <i>a + b = 5</i> as about the Boolean expression
-that returns--for the given content of variables <i>a</i> and <i>b</i>--the
+Let's think about the equation `a + b = 5` as about the Boolean expression
+that returns--for the given content of variables `a` and `b`--the
 Boolean value that indicates whether the values are the solution for the
 equation.
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478313/compiledVariables.png"
-title=""Compiled variables loose their names. (44 KB)" t "><span
-style='text-decoration:none'><img border=0 width=532 height=627 id="Obrázek 12"
-src="Python_illustrated_soubory/image007.jpg"
-alt="Compiled variables loose their names."></span></a></p>
+image::images/compiledVariables.png[Compiled variables loose their names.]
 
-<p class=MsoNormal>This is a fragment of a source code in the C language.
+This is a fragment of a source code in the C language.
  The "C" is not important here.  Let it simply be the
 example of a classical procedural compiled language.  In such case, the
-source text is converted to the machine code via a compiler and a linker. The <i>names</i>
+source text is converted to the machine code via a compiler and a linker. The _names_
 of the variables are totally replaced by addresses, by register names/numbers,
 or the values are optimized to be the parts of the generated machine
 instructions.  There is no trace of strings like "a",
 "b", or "result" in the generated executable.  The
-only exception is when you generate so called <i>debug</i> version of the executable
+only exception is when you generate so called _debug_ version of the executable
 and you explicitly tell the compiler to remember the original names from the
 source code; however, the computer does not need that.  Only the human,
 the programmer wants the names be present in the debug info to make the
 compiled code more readable when debugging.
 
-From that point of view, <i>a name of a variable to a human programmer</i> is
-in the similar relation as <i>an address of a memory space to a processor</i>.
-The name of the variable is <i>directly bound to the address</i>.  Or YOU
+From that point of view, _a name of a variable to a human programmer_ is
+in the similar relation as _an address of a memory space to a processor_.
+The name of the variable is _directly bound to the address_.  Or YOU
 work with the name as with the string (in the source code) or the COMPILER
 works with the address that is the result of the compilation of the name of the
 variable (in the binary, executable code).
 
-  </p>
 
-<h2>Technical representation of a variable</h2>
+=== Technical representation of a variable
 
-<p class=MsoNormal><br>
 Technically, the variable needs the memory space and the identification to be
 useful for a program.  The identification without the memory space makes
 no sense -- one cannot store anything inside.  The memory space without
 the identification is useless either -- one cannot access the memory space.
 
-We were speaking about <i>variables</i> in the previous part.  However,
+We were speaking about _variables_ in the previous part.  However,
 the same holds for objects, i.e. for the memory space that is used to store the
 data of the object.  Better to say, anything in Python is an object that
 can be identified, including the things that are called variables in some
 languages.  But stay tuned, the details will be explained later.  The
 topic is not that easy as you may think at first. (There are more situations
-like that. Say, the <i>strings</i> -- the topic "well known from the time
-of written history". Or not? See <a
-href="http://diveintopython3.org/strings.html" target="_blank">http://diveintopython3.org/strings.html</a>).
+like that. Say, the _strings_ -- the topic "well known from the time
+of written history". Or not? See http://diveintopython3.org/strings.html[]).
 
 The memory address serves as a good technical identifier.  It is
 unambiguous. Moreover, you need no transformation to get the information where
@@ -126,7 +107,7 @@ single bit, the smallest possible piece of memory, one byte, is often used.
  If you want to store an integer, you usually think about 4 or more bytes.
  It depends on the programming language, on the compiler, and also on the
 hardware. (In Python, integer variables are not that limited.  The space
-for one integer value may vary depending on the actual value.)  
+for one integer value may vary depending on the actual value.)
 
 To summarize, the memory space depends on the type of the value and sometimes
 also on the actual value (think about a string of a different length in
@@ -138,11 +119,9 @@ statically if the things are done in a correct way.  During the
 compilation, the type-name information is lost, and the related size of memory
 is present as numbers in the executable.
 
-  </p>
 
-<h2>Where the memory space is located?</h2>
+=== Where the memory space is located?
 
-<p class=MsoNormal><br>
 Think about a simple situation.  You have a normal computer with one
 processor and with one RAM (Random Access Memory).  The RAM address goes
 (for simplicity) from zero to 4.000.000.000.  The variable needs say eight
@@ -152,24 +131,21 @@ bytes.  Where the eight bytes are to be located?
 compiler should care.  Anyway, the code needs to know the location.
  Where the knowledge about the location is stored?
 
-The <i>compiled-language sources</i> are processed by the compilers that
+The _compiled-language sources_ are processed by the compilers that
 consume the source texts and convert them to the machine code.  In such
 case, the knowledge about the location must be hidden somewhere in the code.
- Otherwise the code would not be able to access that portion of memory
-(i.e. what once was the name of the variable).  In the case, <i>the
-address</i> of the memory must be hidden in the code.  But how?
+Otherwise the code would not be able to access that portion of memory
+(i.e. what once was the name of the variable).  In the case, _the
+address_ of the memory must be hidden in the code.  But how?
 
-Roughly said (i do not want to go into too much details):<br>
- </p>
+Roughly said (i do not want to go into too much details):
 
-<p class=MsoNormal>The address can be a constant, and the related memory was
-once (in the source text) called <i>a static variable</i>. Such a variable
+- The address can be a constant, and the related memory was
+once (in the source text) called _a static variable_. Such a variable
 keeps the content during the lifetime of the program and its content changes
-only when it is explicitly changed by the code. </p>
+only when it is explicitly changed by the code.
 
-<p class=MsoNormal style='margin-bottom:12.0pt'> </p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'>The address
+- The address
 is computed relatively -- by adding the numeric offset to some base address (in
 some register) of the memory subspace.  (This is done as the part of the
 low-level instruction behaviour -- no human-related programming like "take
@@ -177,37 +153,35 @@ the register content, add 5, and assign...)  Think about a function that
 uses its own, local variables.  When the function is called, it gets a
 block of memory big enough for storing its local variables.  The local
 variable is located relatively to the beginning of the allocated block.
- The block is released when the function returns. </p>
+ The block is released when the function returns.
 
-<p class=MsoNormal style='margin-bottom:12.0pt'> </p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'>The memory
+- The memory
 is allocated dynamically, during the running time via calling some function
-(like <i>malloc()</i> in C) or via some other action bound to the dedicated
-keyword (like <i>new</i>).  In such case, the address is known only after
+(like `malloc()` in C) or via some other action bound to the dedicated
+keyword (like _new_).  In such case, the address is known only after
 the data space was created (when the program is already running), and the
 address must be stored somewhere for the later reference.  No name is
 bound to such memory space -- even in compiled languages.  The size was
-deduced from the prescribed type (<i>new</i>) or it was given explicitly to the
-function (<i>malloc()</i>).  In the first case, the compiler keeps track
-about the size derived from the type.  In the later case (<i>malloc()</i>),
-a programmer is responsible for working correctly within the allocated space. </p>
+deduced from the prescribed type (_new_) or it was given explicitly to the
+function (`malloc()`).  In the first case, the compiler keeps track
+about the size derived from the type.  In the later case (`malloc()`),
+a programmer is responsible for working correctly within the allocated space.
 
-<p class=MsoNormal> </p>
 
-<h2>Scripting languages</h2>
 
-<p class=MsoNormal><br>
-There was a time when so called <i>scripting languages</i> appeared (think
+=== Scripting languages
+
+
+There was a time when so called _scripting languages_ appeared (think
 about the Unix shell scripts or the Windows batch files).  A command
-processor (say <i>bash</i> or <i>cmd</i> takes the source text called <i>a
-script</i> line by line and interprets the commands written in the file.
- These languages are also called <i>interpreted</i>.  This is because
+processor (say _bash_ or _cmd_ takes the source text called _a
+script_ line by line and interprets the commands written in the file.
+ These languages are also called _interpreted_.  This is because
 of when and how the source text is processed when the script is launched.
  There are no binary native instructions stored in the executed script
 file.  The source text is read and interpreted immediately.  Of
-course, the script has to be interpreted by some binary executable program--<i>the
-interpreter</i>--that is capable to do the actions prescribed in the script.
+course, the script has to be interpreted by some binary executable program--_the
+interpreter_--that is capable to do the actions prescribed in the script.
  (This is done via association with the script extension or via special
 command at the beginning of the script.) Because of the way how it works, the
 interpreted languages are not so fast, not so powerful in comparison with
@@ -220,25 +194,25 @@ usually write only simple scripts, you usually do not want to build more
 complex data structures.  You do not care how the memory is allocated.
  (Anyway, the memory must be allocated dynamically.)
 
-The interpreted languages may often be <i>weakly typed</i>.  Simply said,
+The interpreted languages may often be _weakly typed_.  Simply said,
 if the string value looks like a number, it can be treated as a number.
  Because of that, you can use such value with numeric operators, for
 example.
 
-The simpler languages often play <i>tit for tat</i>.  And we sometimes
+The simpler languages often play _tit for tat_.  And we sometimes
 need something in between the simple scripting languages and the extremely powerful
 (fast running and expressive) compiled languages.  This can be done, and
 Python is the example of such language.  Before speaking about details of
-(also called) <i>dynamic languages</i>, we need to learn something more about
+(also called) _dynamic languages_, we need to learn something more about
 indirect access to memory space (i.e. to the stored values).  It is a
 natural feature also in compiled languages; however, it is essential for
 dynamic languages.
 
-  </p>
 
-<h2>Pointers</h2>
 
-<p class=MsoNormal><br>
+=== Pointers
+
+
 Oh the bloody pointers!  It is the theme where many programmers with less
 formal education and/or with not enough greed for knowledge fail.  When
 looking at, say, C++ source code without the knowledge, many students just give
@@ -250,30 +224,24 @@ will explain the necessary things.)
 
 Let's start with:
 
- </p>
+----------
+int var;
+int *ptr;
+----------
 
-<pre><code>int var;</code></pre><pre><code>int *ptr;</code></pre>
 
-<p class=buttons><a
-href="http://www.experts-exchange.com/viewCodeSnippet.jsp?codeSnippetId=30-6589-1"
-target="_blank">Open in new window</a></p>
-
-<p class=MsoNormal><br>
-The first line declares that there will be the variable named <i>var</i> of the
-type <i>int</i> (means <i>integer</i>).  The second line looks almost the
-same.  There will be variable <i>ptr</i> somehow related to the type <i>int</i>.
+The first line declares that there will be the variable named _var_ of the
+type _int_ (means _integer_).  The second line looks almost the
+same.  There will be variable _ptr_ somehow related to the type _int_.
  But what means the star?  The star changes the meaning of the
-declaration of the variable.  The variable will not be of the <i>int</i>.
- It will be of the <i>pointer to int</i> type, instead.  Have a look
+declaration of the variable.  The variable will not be of the _int_.
+ It will be of the _pointer to int_ type, instead.  Have a look
 at the following picture:
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478316/pointers.png"
-title=""Pointers. (19 KB)" t "><span style='text-decoration:none'><img
-border=0 width=589 height=297 id="Obrázek 11"
-src="Python_illustrated_soubory/image008.jpg" alt=Pointers.></span></a>The
-picture shows that both <i>var</i> and <i>ptr</i> variables need their memory
-space.  In other words, <i>pointer variable</i> is also <i>a variable</i>.
+image::images/pointers.png[Pointers.]
+
+The picture shows that both _var_ and _ptr_ variables need their memory
+space.  In other words, _pointer variable_ is also _a variable_.
  A pointer variable also stores a value.  The value could be called a
 pointer value.  Basically, it is the address of another memory.  As
 explained earlier, any variable needs memory space and the identification.
@@ -287,40 +255,36 @@ variables need 8 bytes in such case.
 
 Let's assign the values to the variables to see how to work with pointers:
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478317/workingWithPointers.png"
-title=""Working with pointers. (13 KB)" t "><span style='text-decoration:
-none'><img border=0 width=527 height=344 id="Obrázek 10"
-src="Python_illustrated_soubory/image009.png" alt="Working with pointers."></span></a></p>
+image::images/workingWithPointers.png[Working with pointers.]
 
-<p class=MsoNormal>You should already be very familiar with the fist assignment
-of the 2 to the <i>var</i> variable.  The earlier picture shows that the
+You should already be very familiar with the fist assignment
+of the 2 to the _var_ variable.  The earlier picture shows that the
 four bytes at the address 12 are filled with the binary representation of the
 value 2.  Notice, that the variable was given the memory space at the
-address 12.  The notation <i>&amp;var</i> means <i>the address of the variable</i>.
- Now, the <i>ptr</i> variable is ready to store the address.  This
+address 12.  The notation _&amp;var_ means _the address of the variable_.
+ Now, the _ptr_ variable is ready to store the address.  This
 way, the address 12 can be assigned to the pointer variable (see the second
 line on the picture).
 
 Having the pointer value (i.e. the address 12) inside the pointer variable that
 is located on address 56 (see the picture above), we can access the memory
-space of the <i>var</i> variable also indirectly, through the pointer.  To
-do that, we have to read the content of the variable <i>ptr</i> located at the
+space of the _var_ variable also indirectly, through the pointer.  To
+do that, we have to read the content of the variable _ptr_ located at the
 address 56, and then we have to use its content (12) to locate the memory at
 that address.  That's all!  No extra magic.  Well, the syntax
 may have look magically...
 
-The <i>*ptr</i> (with the star at in front of the name of the variable says:
+The _*ptr_ (with the star at in front of the name of the variable says:
 take the content of the ptr and use it for indirect access to another part of
-memory.  The process is named <i>dereferencing</i>.  The pointer
-variable <i>refers</i> to some other memory, and we want to access it.  As
+memory.  The process is named _dereferencing_.  The pointer
+variable _refers_ to some other memory, and we want to access it.  As
 we have to explicitly use the star in front of the pointer variable, it is
-called <i>explicit dereferencing</i>.
+called _explicit dereferencing_.
 
-Having the <i>access to the part of memory</i> means also the <i>write access</i>.
+Having the _access to the part of memory_ means also the _write access_.
  The last line on the picture shows that the memory space is assigned by
-new value 3.  If you now read the variable <i>var</i>, you would get the
-value 3.  The memory space belongs to the <i>var</i> variable, but from
+new value 3.  If you now read the variable _var_, you would get the
+value 3.  The memory space belongs to the _var_ variable, but from
 now on it is not the only way how it can be accessed.
 
 Does the pointer theme look so difficult to you now?  Is there anything
@@ -332,18 +296,18 @@ compiler converts the name to the address, deduces the size from the type of
 the variable, and uses the type for static checking during the compilation.
  Is there anything about types at the last picture?  Well, yes.
 
-The <i>*ptr = 3;</i> assigns the integer value.  The integer value can be
+The _*ptr = 3;_ assigns the integer value.  The integer value can be
 assigned only to an integer variable.  How the compiler knows that this
 assignment is correct?  The answer is not that difficult.  It is more
 difficult to spot that the check must be done by the compiler.
 
-The <i>ptr</i> was declared as <i>pointer to int</i>.  This way, it says
+The _ptr_ was declared as _pointer to int_.  This way, it says
 that it point to the memory of the size that is capable to store the int value.
  In other words, pointers in compiled languages are usually bound with
 some type.  And again, the type is used only for checking during
-compilation (hence the name <i>statically typed languages</i>).  The
+compilation (hence the name _statically typed languages_).  The
 information about the type disappears when generating the binary executable.
- Anyway, the pointers are <i>typed</i> in the compiled languages.
+ Anyway, the pointers are _typed_ in the compiled languages.
 
 What about untyped pointers?  Are they possible?  Is it possible to
 have a pointer to any type?  The short answer is yes.  The pointer
@@ -363,54 +327,46 @@ nowhere."  Naturally, you cannot de-reference such pointer.  The
 "nowhere" can never be accessed.  If you try, the screaming
 sound... kidding, not screaming actually... the error is somehow announced.
 
-  </p>
 
-<h2>Drawing variables and pointers symbolically</h2>
+=== Drawing variables and pointers symbolically
 
-<p class=MsoNormal><br>
 Our brain likes thinking in abstractions.  "No boring numbers,
 please.  I tend to forget them."  We always solve (sub)problem
 in our head first, and only then we write the idea down.  We use our
 imagination.  If it is too much to keep it in our brain, we draw it on a
 paper...
 
-Also, we need some graphical abstraction <i>to be able to share</i> what we
+Also, we need some graphical abstraction _to be able to share_ what we
 mean with others.  We want to keep the picture as abstract as possible, as
 simple as possible, but not simpler than needed.
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478318/pointersSchematically.png"
-title=""Pointers schematically. (7 KB)" t "><span style='text-decoration:
-none'><img border=0 width=563 height=158 id="Obrázek 9"
-src="Python_illustrated_soubory/image010.jpg" alt="Pointers schematically."></span></a></p>
+image::images/pointersSchematically.png[Pointers schematically.]
 
-<p class=MsoNormal>The memory space for the variable is usually drawn as
+The memory space for the variable is usually drawn as
 rectangle.  Again, a pointer variable is also a variable -- it needs its
 rectangle too.  However, we want the pointer value be more abstract.
  (Recall what the brain have said about the numbers.  Anyway, we do
 not know the exact addresses and we do not care.)  The only important
-thing for us is that the value points to another memory space (hence <i>the
-pointer</i>).  And the pointer should be pointed, right? ;)  To
+thing for us is that the value points to another memory space (hence _the
+pointer_).  And the pointer should be pointed, right? ;)  To
 summarize, the pointer value is drawn as a fat dot with an arrow pointed to the
-other memory-space rectangle.  
+other memory-space rectangle.
 
 We also do not care how the NULL is implemented.  The only interesting
 feature is that it points to nowhere.  The "electric ground"
 mark is usually used.  That mark was very usual and well known to those
-who worked with first computers -- not counting Charles Babbage (<a
-href="http://en.wikipedia.org/wiki/Babbage" target="_blank">http://en.wikipedia.org/wiki/Babbage</a>)
-and "World's First Computer Programmer" Ada Lovelace (<a
-href="http://en.wikipedia.org/wiki/Ada_Lovelace" target="_blank">http://en.wikipedia.org/wiki/Ada_Lovelace</a>).
+who worked with first computers -- not counting Charles Babbage
+(http://en.wikipedia.org/wiki/Babbage[]
+and "World's First Computer Programmer" Ada Lovelace
+(http://en.wikipedia.org/wiki/Ada_Lovelace[]).
 
 Now, repeat "the pointers" until you really know what they are about.
 
-  </p>
 
-<h2>References</h2>
+=== References
 
-<p class=MsoNormal><br>
-The term <i>references</i> often causes confusion.  The main reason is
-that it can be used in different contexts.  
+The term _references_ often causes confusion.  The main reason is
+that it can be used in different contexts.
 
 The more abstract point of view is based on the idea that the reference value
 allows you to access some data (memory space) indirectly.  From that
@@ -430,38 +386,29 @@ later).
 
 Back to the old compiled languages, here C++.
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478319/references.png"
-title=""C++ reference. (21 KB)" t "><span style='text-decoration:
-none'><img border=0 width=585 height=275 id="Obrázek 8"
-src="Python_illustrated_soubory/image011.jpg" alt="C++ reference."></span></a>The
-image shows the C++ syntax.  Ignore the syntactic details if you do not
-know the language.  What is important, the <i>ref</i> variable must be
+image::images/references.png[C++ reference.]
+
+The image shows the C++ syntax.  Ignore the syntactic details if you do not
+know the language.  What is important, the _ref_ variable must be
 initialized when declared.  The reason is that it must always contain a
 reference to some already existing variable, i.e. to its allocated memory
 space.
 
-Here the <i>ref</i> variable was located by the compiler/linker/loader at the
+Here the _ref_ variable was located by the compiler/linker/loader at the
 address 75 (not important).  The important is that its memory space was
-filled with the address of the <i>var</i> variable immediately.  The C++
+filled with the address of the _var_ variable immediately.  The C++
 restriction is that you cannot change the reference variable later.  Any
-usage of the <i>ref</i> has the same effect as using the variable <i>var</i>.
- 
+usage of the _ref_ has the same effect as using the variable _var_.
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478320/workingWithReferences.png"
-title=""Working with references in C++. (8 KB)" t "><span
-style='text-decoration:none'><img border=0 width=535 height=187 id="Obrázek 7"
-src="Python_illustrated_soubory/image012.png"
-alt="Working with references in C++."></span></a></p>
+image::images/workingWithReferences.png[Working with references in C++]
 
-<p class=MsoNormal>The main difference from pointers is how the references look
-in the source code.  Once the reference variable is set, you can use it <i>as
-if it was another name for the pointed variable</i>.  In the example, the
-reference variable is named <i>ref</i> which forces you to think this way about
-it.  But imagine if it was named <i>myVar</i>.  When using a
+The main difference from pointers is how the references look
+in the source code.  Once the reference variable is set, you can use it _as
+if it was another name for the pointed variable_.  In the example, the
+reference variable is named _ref_ which forces you to think this way about
+it.  But imagine if it was named _myVar_.  When using a
 reference variable, it looks the same as if you worked with a normal, simple
-variable.  It is because the <i>automatic de-reference</i> is done (by
+variable.  It is because the _automatic de-reference_ is done (by
 compiler, for you).  Anyway, the target memory space is still accessed
 indirectly.
 
@@ -469,53 +416,48 @@ In other words, when you do not see the reference-variable declaration, you are
 not able to say if you work with a simple variable or (indirectly) with another
 variable.
 
-  </p>
 
-<h2>References for Python</h2>
 
-<p class=MsoNormal><br>
-Python uses references internally a lot.  Let's define the term <i>reference</i>
+=== References for Python
+
+
+Python uses references internally a lot.  Let's define the term _reference_
 the way we need for explanation of the Python internals.
 
-<a
-href="http://filedb.experts-exchange.com/incoming/2011/07_w29/478322/referencesSchematically.png"
-title=""References for explaining Python internals -- graphically. (18 KB)" t "><span
-style='text-decoration:none'><img border=0 width=602 height=336 id="Obrázek 6"
-src="Python_illustrated_soubory/image013.jpg"
-alt="References for explaining Python internals -- graphically."></span></a>We
-usually do not draw the references on the paper the same way as we do with
+image::images/referencesSchematically.png[References for explaining Python internals -- graphically]
+
+We usually do not draw the references on the paper the same way as we do with
 pointer-based data structures.  Anyway, we can draw them the same way when
 explaining the internals.  Actually, the references are used in Python the
 very same way as pointers are used in other languages.  However, it is hidden
 from the programmer.  The reference value in Python (as elsewhere) needs
 always the same memory space to be stored (4 bytes on 32-bit systems, 8 bytes
-on 64-bit system).  
+on 64-bit system).
 
-However, Python is <i>a dynamic language</i> where memory space for the objects
+However, Python is _a dynamic language_ where memory space for the objects
 is always allocated in run-time, and where the name of any variable is kept
 intentionally in a string form inside Python's internal data structures.
 
-Why to call them <i>references</i> and not <i>pointers</i>?  This is
+Why to call them _references_ and not _pointers_?  This is
 because you will find no explicit de-referencing when working with Python.
  But that's not all!  There is one more indirection level when
 working with variables.  The topic will be discussed more in part 3.
 
 A side note: There is nothing like NULL value for Python references.  This
 would break the concept of references.  However, there is the single
-object named <i>None</i> that plays the same role.  Whenever another
-object refers to <i>None</i>, it means that there is nothing more interesting
+object named _None_ that plays the same role.  Whenever another
+object refers to _None_, it means that there is nothing more interesting
 there (if the fact is not interesting on its own).
 
-<br>
-<b>Topics to be discussed in </b><a
-href="http://www.experts-exchange.com/A_7109.html" target="_blank">part 3</a>
 
-- Python as a dynamic language<br>
-- everything in Python is an object<br>
-- trivial Python built-in types<br>
-- container built-in types<br>
-- what is behind the assignment operation in Python<br>
-- containers and references<br>
-- Python approach variables (dict of name-&gt;reference)<br>
-- where the types are stored in Python</p>
+=== Topics to be discussed in part 3
+
+- Python as a dynamic language
+- everything in Python is an object
+- trivial Python built-in types
+- container built-in types
+- what is behind the assignment operation in Python
+- containers and references
+- Python approach variables (dict of `name->reference`)
+- where the types are stored in Python
 

@@ -1,3 +1,4 @@
+[[part1]]
 == Part 1
 
 === The really strange introduction
@@ -81,7 +82,7 @@ when thinking about complex things.  The caveman's brain also needed that.
  What is _tangible_ is more understandable.  "Give me that
 piece of meat, please.  Or I will hit your skull with that stone."
 
-image::images/caveman.jpg[Give me that piece of meat, please.  Or I will hit your skull with that stone.]
+image::images/caveman.jpg[Give me that piece of meat, please. Or I will hit your skull with that stone.]
 
 
 [My sorry for using and modifying the copyrighted image of the
@@ -102,23 +103,18 @@ objects in any programming language.
 
 === Variables
 
-<h2><span style='font-size:12.0pt'><br>
 Even if you do not like the mathematical approach to programming, you should be
 aware of the fact that the name _variables_ comes from mathematics.
- You know them from school as _letters_ that are used to replace _any_
+You know them from school as _letters_ that are used to replace _any_
 number.  You have learned how to search for their values if they were part
 of what we call equations.  And you have learned how to manipulate
 symbolically the formulas so that you could get simpler formulas.  To
 summarize, the variables in mathematics are used as symbolic replacements for
 the possible values.
 
-</span><a
-href="http://filedb.experts-exchange.com/incoming/2011/05_w19/456403/varM.png"
-title=""Mathematical formalism and variables. (3 KB)" t "><span
-style='font-size:12.0pt;text-decoration:none'><img border=0 width=302
-height=85 id="Obrázek 3" src="Python_illustrated_soubory/image004.png"
-alt="Mathematical formalism and variables."></span></a><span style='font-size:
-12.0pt'>Now the computer-related point of view.  Any value in computers
+image::images/varM.png[Mathematical formalism and variables.]
+
+Now the computer-related point of view.  Any value in computers
 need some memory space to be stored.  One have to reserve certain amount
 of bytes -- the "bigger" value, the more bytes.  So, from the
 hardware point of view, the variable is the memory space of some size placed
@@ -128,13 +124,9 @@ the addresses.  The hardware does not need any "names" for
 variables.  The size and the placement in memory is all the processor
 needs to know when working with the content.
 
-</span><a
-href="http://filedb.experts-exchange.com/incoming/2011/05_w19/456404/varC.png"
-title=""Hardware-oriented view to variables. (20 KB)" t "><span
-style='font-size:12.0pt;text-decoration:none'><img border=0 width=657
-height=549 id="Obrázek 2" src="Python_illustrated_soubory/image005.png"
-alt="Hardware-oriented view to variables."></span></a><span style='font-size:
-12.0pt'>Humans are more error prone when working with numbers (unless the
+image::images/varC.png[Hardware-oriented view to variables.]
+
+Humans are more error prone when working with numbers (unless the
 number means the sallary, or the pocket money, or the number of beers, or
 similar counting cases that are so obvious to know them right).  When
 programming, we combine the mathematical thinking with the computer-related
@@ -151,12 +143,9 @@ same steps many times in future (for a different input to get the wanted
 output), or we need to utilize the raw speed of the computer hardware and the
 ability to remember, to organize and to work with many boring details.
 
-</span><a
-href="http://filedb.experts-exchange.com/incoming/2011/05_w19/456414/varA.png"
-title=""Mind picture of variables. (11 KB)" t "><span
-style='font-size:12.0pt;text-decoration:none'><img border=0 width=417
-height=240 id="Obrázek 1" src="Python_illustrated_soubory/image006.png"
-alt="Mind picture of variables."></span></a><span style='font-size:12.0pt'>Programming
+image::images/varA.png[Mind picture of variables.]
+
+Programming
 languages are here to put the humans (who design the way to get the solution)
 and the computers together.  A programming language is used for
 transformation of our abstract mental pictures of the solution to the form of a
@@ -182,20 +171,19 @@ are basically text files that are later compiled somehow to something more
 acceptable by the computer hardware (to be executed as steps towards the
 solution).
 
-</span>Topics for the planned part 2</h2>
+=== Topics for the planned part 2
 
-<br>
-More about variables and about memory allocation:<br>
-- statically compiled languages<br>
-- statically allocated memory (compiled time)<br>
-- dynamically allocated memory (run time)<br>
-- dynamic languages<br>
-- directly bound (variable) name to the statically allocated memory<br>
-- indirectly bound name of a variable in compiled languages<br>
-- what is a pointer (explicit dereferencing)<br>
-- what is a reference<br>
-- type of a variable<br>
-- types, variables, and compiled languages<br>
-- types, variables, and scripting languages<br>
-- Python approach to types and variables (globals() -- dict of
-name-&gt;reference variables)
+More about variables and about memory allocation:
+
+- statically compiled languages
+- statically allocated memory (compiled time)
+- dynamically allocated memory (run time)
+- dynamic languages
+- directly bound (variable) name to the statically allocated memory
+- indirectly bound name of a variable in compiled languages
+- what is a pointer (explicit dereferencing)
+- what is a reference
+- type of a variable
+- types, variables, and compiled languages
+- types, variables, and scripting languages
+- Python approach to types and variables (`globals()` -- dict of `name->reference`)

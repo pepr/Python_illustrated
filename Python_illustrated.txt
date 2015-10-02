@@ -1,5 +1,10 @@
 Python illustrated
 ==================
 :doctype: book
+:toc:
 
 include::Python_illustrated_part1.txt[]
+
+include::Python_illustrated_part2.txt[]
+
+include::Python_illustrated_part3.txt[]
