@@ -1,0 +1,2452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9 python3 alpha1" />
+<title>Python illustrated</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="book">
+<div id="header">
+<h1>Python illustrated</h1>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="part1">Part 1</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_the_really_strange_introduction">The really strange introduction</h3>
+<div class="paragraph"><p>Once upon a time there were individuals who intentionally put the grass seeds
+to the soil with anticipation of solving their nutrition problems. Or they
+maybe only played with seeds and noticed what happened&#8230; Some years later,
+people chew pizza made of flour, enjoying their holiday in Italy, thinking of
+nothing&#8201;&#8212;&#8201;definitely not about the grass seeds that were put to the soil.
+Still, the local bakers strive for perfection in baking <em>The Best Pizza in
+The World</em>, choosing carefully the kind of flour.</p></div>
+<div class="paragraph"><p>Another time, another places, there were individuals that played with first
+computers. They knew <em>everything</em> about their computer&#8201;&#8212;&#8201;till the last
+bit. (Frankly, it was <em>a bit easier</em> as there was not so much bits inside
+as they are now.) Often, they built the computer. Or at least they fell in love
+with it and knew how to build it (also in cases when they bought it), and they
+replayed in their imagination "how they are rebuilding the same",
+feeling themselves strong, self-confident in the area. They knew "much
+more" about "much less" in comparison with our present time.</p></div>
+<div class="paragraph"><p>"Keep the ballance." The greatly admired people are often extreme
+people. They often brought us something very valuable, but they were not
+understood in their time, and they often <em>died poor</em> or in physical or in
+mental sense. In other words, being odd makes it sometimes easier to be great
+in something. The question is whether you want that. On the other hand,
+focusing on being intentionally dumb in the chosen area to keep the statistic
+ballance inside the society and expecting to be automatically successful in the
+other areas&#8230; Well, it simply does not work.</p></div>
+<div class="paragraph"><p>"Why the hell is he writing such obvious things?" This is called a
+professional blindness. When focused on our professional problems, we often
+behave strangely. Programming is no exception. Experts often think about the
+users as about dumbs because the users cannot do <em>such obvious things</em>.
+And the pizza chewers complain like "Why the application is so complicated
+and still it does not do that one simple thing that I want?" And there are
+also people, who simply want to try programming to have some fun.</p></div>
+<div class="paragraph"><p>The very basic things should never be underestimated or postponed for learning
+later. It is no accident to call such things <em>Basic Building Blocks</em> of
+programming. You can put something that works when interconnecting several
+ready-to-be-used, bigger building blocks. However, it will not make you
+universal. This will not help you to approach any general problem that could be
+solved.</p></div>
+<div class="paragraph"><p>"One picture is worth of thousands word." Well, it depends. The truth
+is that "images" and "imagination" clearly have some common
+base. Good imaginagion is one of the key abilities of a successful programmer.
+In my opinion, this is the direction in which the beginners should be trained.
+Too many teachers are not aware of that. They may think that it is obvious and
+the students should already know that. The truth is that not all students are
+of that kind to naturally feel the same. Also, I may be wrong. Anyway, I am
+going to focuse on helping your imagination with images when explaining the
+basic building blocks of the Python programming language. The following serie
+(with at least one part ;) will show if the idea is good or not&#8201;&#8212;&#8201;just react
+after reading the article.</p></div>
+<div class="paragraph"><p>"Stop writing when it is good enough. It will never be perfect."
+ This is one of the golden rules.  Another one says: "Never say
+never."  A kind of paradox?  Maybe.  I will try to put both
+together.  Based on your reactions to the specific parts, I will try to
+simplify or explain better the basics to that level (from different angles of
+view) that you will find nothing else to ask.  (Just kidding.
+ Everything can be improved.) If you like mathematical or otherwise formal
+approach to programming, you may not like the article.  I will try to
+avoid mathematics and formalism&#8201;&#8212;&#8201;not because I do not like it, but because
+beginners usually do not like it, and because it does not help to train in
+imagination if you have a poor one (no offense meant, no shame).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_objects">Objects</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/objectsNoIdea.png" alt="What are the objects good for?" />
+</div>
+</div>
+<div class="paragraph"><p>The reality does not need objects.
+It is our perception that tries to recognize the object.  It is our
+brain that is not capable to capture the reality as collection of all
+recognizable and possibly interrelated details.  Our brain needs simplification
+when thinking about complex things.  The caveman&#8217;s brain also needed that.
+ What is <em>tangible</em> is more understandable.  "Give me that
+piece of meat, please.  Or I will hit your skull with that stone."</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/caveman.jpg" alt="Give me that piece of meat" />
+</div>
+</div>
+<div class="paragraph"><p>[My sorry for using and modifying the copyrighted image of the
+<a href="http://www.stayfitbug.com/wp-content/uploads/2010/09/caveman-diet-300x200.jpg">caveman diet</a>
+from the stayfitbug.com article
+<a href="http://www.stayfitbug.com/the-fitness-bug/the-caveman-no-supplements-vs-the-21st-century-man-takes-supplements/">The
+Caveman (No supplements) vs The 21st Century Man (Takes supplements)</a>
+No, I did not ask them for permission (you know, the time pressure, etc.).  But yes, I
+will remove it if asked. On the other hand, isn&#8217;t this mutually beneficial?]</p></div>
+<div class="paragraph"><p>Well, they are too complex and too distracting objects on the picture&#8201;&#8212;&#8201;not
+good from a pedagogical point of view.  And you are capable of abstract
+thinking, right?</p></div>
+<div class="paragraph"><p>Let&#8217;s start with <em>variables</em> that are a kind of simplest version of
+objects in any programming language.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_variables">Variables</h3>
+<div class="paragraph"><p>Even if you do not like the mathematical approach to programming, you should be
+aware of the fact that the name <em>variables</em> comes from mathematics.
+You know them from school as <em>letters</em> that are used to replace <em>any</em>
+number.  You have learned how to search for their values if they were part
+of what we call equations.  And you have learned how to manipulate
+symbolically the formulas so that you could get simpler formulas.  To
+summarize, the variables in mathematics are used as symbolic replacements for
+the possible values.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/varM.png" alt="Mathematical formalism and variables." />
+</div>
+</div>
+<div class="paragraph"><p>Now the computer-related point of view.  Any value in computers
+need some memory space to be stored.  One have to reserve certain amount
+of bytes&#8201;&#8212;&#8201;the "bigger" value, the more bytes.  So, from the
+hardware point of view, the variable is the memory space of some size placed
+somewhere.  We have to know where the "where" is, and we (as
+humankind) decided to number the memory positions, and we name the numbers as
+the addresses.  The hardware does not need any "names" for
+variables.  The size and the placement in memory is all the processor
+needs to know when working with the content.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/varC.png" alt="Hardware-oriented view to variables." />
+</div>
+</div>
+<div class="paragraph"><p>Humans are more error prone when working with numbers (unless the
+number means the sallary, or the pocket money, or the number of beers, or
+similar counting cases that are so obvious to know them right).  When
+programming, we combine the mathematical thinking with the computer-related
+point of view.  We think in terms of memory space, but we do not like to
+use the numeric address when thinking about the placement of that space.
+ It would be too much details, and our brain would defend the situation
+using the "forget it" mechanism.  The name for the space
+(instead of the numeric address) is much more acceptable.  Our lazy brain
+likes abstractions.  It does not like details, it likes working with fuzzy
+pictures generated by our imagination.  The brain likes to search for the
+principles of the solution of the problem.  When programming, we try to
+automatize the steps leading to the solution.  Or we need to repeat the
+same steps many times in future (for a different input to get the wanted
+output), or we need to utilize the raw speed of the computer hardware and the
+ability to remember, to organize and to work with many boring details.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/varA.png" alt="Mind picture of variables." />
+</div>
+</div>
+<div class="paragraph"><p>Programming
+languages are here to put the humans (who design the way to get the solution)
+and the computers together.  A programming language is used for
+transformation of our abstract mental pictures of the solution to the form of a
+formal description of steps leading to the solution (for a computer).
+ Having that function, our favourite programming language must be capable
+to describe the abstractions that were born in our brain.  But also the
+reverse direction works: our favourite programming language uses constructions
+and data abstractions that form the abstract thinking.  We gradually tend
+to use the programming-language abstractions as basic blocks for our
+imagination.  In other words, we learn <em>how to program in the
+programming language</em>.  This is one of the main reasons why we have to
+deeply understand the basic blocks of the programming language.  We have
+to make the related abstract basic block for our thinking.</p></div>
+<div class="paragraph"><p>Back to variables. Let&#8217;s agree that our mind picture and the programming language
+abstraction of a "variable" have the common features: 1) they can be
+represented by the name, 2) they are capable to store the value.</p></div>
+<div class="paragraph"><p>The programming languages introduced several ways how to put the name of the
+variable (called the <em>identifier</em> of the variable) with the related memory
+space.  We use the variable names in our "program sources" which
+are basically text files that are later compiled somehow to something more
+acceptable by the computer hardware (to be executed as steps towards the
+solution).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_topics_for_the_planned_part_2">Topics for the planned part 2</h3>
+<div class="paragraph"><p>More about variables and about memory allocation:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+statically compiled languages
+</p>
+</li>
+<li>
+<p>
+statically allocated memory (compiled time)
+</p>
+</li>
+<li>
+<p>
+dynamically allocated memory (run time)
+</p>
+</li>
+<li>
+<p>
+dynamic languages
+</p>
+</li>
+<li>
+<p>
+directly bound (variable) name to the statically allocated memory
+</p>
+</li>
+<li>
+<p>
+indirectly bound name of a variable in compiled languages
+</p>
+</li>
+<li>
+<p>
+what is a pointer (explicit dereferencing)
+</p>
+</li>
+<li>
+<p>
+what is a reference
+</p>
+</li>
+<li>
+<p>
+type of a variable
+</p>
+</li>
+<li>
+<p>
+types, variables, and compiled languages
+</p>
+</li>
+<li>
+<p>
+types, variables, and scripting languages
+</p>
+</li>
+<li>
+<p>
+Python approach to types and variables (<code>globals()</code>&#8201;&#8212;&#8201;dict of <code>name-&gt;reference</code>)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="part2">Part 2</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_less_strange_but_still_introduction">Less strange, but still introduction</h3>
+<div class="paragraph"><p>The earlier title of this series was <em>Python Basics&#8201;&#8212;&#8201;Illustrated`.
+And there were (fair) complaints that these are on _basics</em> of the language.
+is introduction was added (1st August, 2011) to reflect some reactions.
+As any other word, the word <em>basics</em> is a symbol with some meaning attached
+to the word by some agreement.  Still, we always have to think in some context to understand
+the agreement.  You may say that what is described in this and previous
+articles is not related to <em>Python basics</em> at all.  It could be
+because you expect a text written in some context that you met when reading
+some other <em>basics</em>.  The article series could be renamed to <em>Python
+foundation</em> or <em>Python internals</em>.  However, the later terms are <em>more
+technical</em>, and I do not think it would help you to understand what I want
+to write about.  Instead, I am asking you to change the context of
+thinking about it.  Tutorials often start with the simplest example that
+shows a working program (say "Hello, World!"&#8201;&#8212;&#8201;it is also a kind of
+unspoken agreement bound to the "creation of a tutorial").  This
+is understandable.  There are many ways of how to attract a beginner&#8217;s
+attention.  The context of "basics" in this series is based on
+"what you should know to understand".  I am focusing on
+"mental pictures of what is done" rather than on "how to write
+the block of code".  For that, I need also the text of this second
+part.  I am aware of the situation that you may want to skip these two
+articles with disagreement. ("Not related to Python at all!")
+In the same time I believe, that the information will be useful for those
+who find some knowledge gaps when reading the next <a href="#part3">part 3</a>.</p></div>
+<div class="paragraph"><p>The previous <a href="#part1">part 1</a>
+explained where the term "variable" came from, how we can think about
+it, what it represents, how the variables are related to mathematics on one
+side, and to computers on the other side.  This part (2) is focused on
+more details that you have to understand if you really want to be good in
+thinking about variables (creating a mental picture) and about using them in
+programming languages.</p></div>
+<div class="paragraph"><p>For explaining principles of working with variables, we need some excursion
+outside the Python point of view.  This part describes variables in
+context of traditional compiled languages to show some details.  Let&#8217;s
+talk about pointers and references.  Good understanding will be necessary
+to swallow the part 3.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_variables_in_the_old_compiled_languages">Variables in the (old) compiled languages</h3>
+<div class="paragraph"><p>Let&#8217;s think about the equation <code>a + b = 5</code> as about the Boolean expression
+that returns&#8212;for the given content of variables <code>a</code> and <code>b</code>--the
+Boolean value that indicates whether the values are the solution for the
+equation.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/compiledVariables.png" alt="Compiled variables loose their names." />
+</div>
+</div>
+<div class="paragraph"><p>This is a fragment of a source code in the C language.
+ The "C" is not important here.  Let it simply be the
+example of a classical procedural compiled language.  In such case, the
+source text is converted to the machine code via a compiler and a linker. The <em>names</em>
+of the variables are totally replaced by addresses, by register names/numbers,
+or the values are optimized to be the parts of the generated machine
+instructions.  There is no trace of strings like <code>"a"</code>,
+<code>"b"</code>, or <code>"result"</code> in the generated executable.  The
+only exception is when you generate so called <em>debug</em> version of the executable
+and you explicitly tell the compiler to remember the original names from the
+source code; however, the computer does not need that.  Only the human,
+the programmer wants the names be present in the debug info to make the
+compiled code more readable when debugging.</p></div>
+<div class="paragraph"><p>From that point of view, <em>a name of a variable to a human programmer</em> is
+in the similar relation as <em>an address of a memory space to a processor</em>.
+The name of the variable is <em>directly bound to the address</em>.  Or YOU
+work with the name as with the string (in the source code) or the COMPILER
+works with the address that is the result of the compilation of the name of the
+variable (in the binary, executable code).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_technical_representation_of_a_variable">Technical representation of a variable</h3>
+<div class="paragraph"><p>Technically, the variable needs the memory space and the identification to be
+useful for a program.  The identification without the memory space makes
+no sense&#8201;&#8212;&#8201;one cannot store anything inside.  The memory space without
+the identification is useless either&#8201;&#8212;&#8201;one cannot access the memory space.</p></div>
+<div class="paragraph"><p>We were speaking about <em>variables</em> in the previous part.  However,
+the same holds for objects, i.e. for the memory space that is used to store the
+data of the object.  Better to say, anything in Python is an object that
+can be identified, including the things that are called variables in some
+languages.  But stay tuned, the details will be explained later.  The
+topic is not that easy as you may think at first. (There are more situations
+like that. Say, the <em>strings</em>&#8201;&#8212;&#8201;the topic "well known from the time
+of written history". Or not? See <a href="http://diveintopython3.org/strings.html">http://diveintopython3.org/strings.html</a>).</p></div>
+<div class="paragraph"><p>The memory address serves as a good technical identifier.  It is
+unambiguous. Moreover, you need no transformation to get the information where
+the memory is located. The major Python implementations also take that approach&#8201;&#8212;&#8201;the address is equal to the technical identification of any variable (or of
+any object).  Having any object &lt;b&gt;obj&lt;/b&gt; in Python, you can apply the
+built-in function &lt;b&gt;id(obj)&lt;/b&gt; to get the identification.  (However,
+other Python implementations are free to use a different kind of identification
+in future. Think about a distributed computing environment where there is no
+single, shared memory address space. The address is ambiguous in such systems
+unless it is extended by some extra information about the location of the
+memory/computer.)</p></div>
+<div class="paragraph"><p>What about the size of the reserved memory space?  When you need to store
+a Boolean value, one bit would be enough.  As you cannot address one
+single bit, the smallest possible piece of memory, one byte, is often used.
+ If you want to store an integer, you usually think about 4 or more bytes.
+ It depends on the programming language, on the compiler, and also on the
+hardware. (In Python, integer variables are not that limited.  The space
+for one integer value may vary depending on the actual value.)</p></div>
+<div class="paragraph"><p>To summarize, the memory space depends on the type of the value and sometimes
+also on the actual value (think about a string of a different length in
+whatever language].  In compiled languages, the size of trivial types is
+known.  Therefore, the size of memory is related to the type.
+ However, the information about the type is used/processed only during the
+compilation.  Similarly to variable names, the type is used only to check
+statically if the things are done in a correct way.  During the
+compilation, the type-name information is lost, and the related size of memory
+is present as numbers in the executable.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_where_the_memory_space_is_located">Where the memory space is located?</h3>
+<div class="paragraph"><p>Think about a simple situation.  You have a normal computer with one
+processor and with one RAM (Random Access Memory).  The RAM address goes
+(for simplicity) from zero to 4.000.000.000.  The variable needs say eight
+bytes.  Where the eight bytes are to be located?</p></div>
+<div class="paragraph"><p>"I don&#8217;t care."  And you are right.  The machine and the
+compiler should care.  Anyway, the code needs to know the location.
+ Where the knowledge about the location is stored?</p></div>
+<div class="paragraph"><p>The <em>compiled-language sources</em> are processed by the compilers that
+consume the source texts and convert them to the machine code.  In such
+case, the knowledge about the location must be hidden somewhere in the code.
+Otherwise the code would not be able to access that portion of memory
+(i.e. what once was the name of the variable).  In the case, <em>the
+address</em> of the memory must be hidden in the code.  But how?</p></div>
+<div class="paragraph"><p>Roughly said (i do not want to go into too much details):</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The address can be a constant, and the related memory was
+once (in the source text) called <em>a static variable</em>. Such a variable
+keeps the content during the lifetime of the program and its content changes
+only when it is explicitly changed by the code.
+</p>
+</li>
+<li>
+<p>
+The address
+is computed relatively&#8201;&#8212;&#8201;by adding the numeric offset to some base address (in
+some register) of the memory subspace.  (This is done as the part of the
+low-level instruction behaviour&#8201;&#8212;&#8201;no human-related programming like "take
+the register content, add 5, and assign&#8230;)  Think about a function that
+uses its own, local variables.  When the function is called, it gets a
+block of memory big enough for storing its local variables.  The local
+variable is located relatively to the beginning of the allocated block.
+ The block is released when the function returns.
+</p>
+</li>
+<li>
+<p>
+The memory
+is allocated dynamically, during the running time via calling some function
+(like <code>malloc()</code> in C) or via some other action bound to the dedicated
+keyword (like <code>new</code>).  In such case, the address is known only after
+the data space was created (when the program is already running), and the
+address must be stored somewhere for the later reference.  No name is
+bound to such memory space&#8201;&#8212;&#8201;even in compiled languages.  The size was
+deduced from the prescribed type (<code>new</code>) or it was given explicitly to the
+function (<code>malloc()</code>).  In the first case, the compiler keeps track
+about the size derived from the type.  In the later case (<code>malloc()</code>),
+a programmer is responsible for working correctly within the allocated space.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_scripting_languages">Scripting languages</h3>
+<div class="paragraph"><p>There was a time when so called <em>scripting languages</em> appeared (think
+about the Unix shell scripts or the Windows batch files).  A command
+processor (say <code>bash</code> or <code>cmd</code> takes the source text called <em>a
+script</em> line by line and interprets the commands written in the file.
+ These languages are also called <em>interpreted</em>.  This is because
+of when and how the source text is processed when the script is launched.
+ There are no binary native instructions stored in the executed script
+file.  The source text is read and interpreted immediately.  Of
+course, the script has to be interpreted by some binary executable program--<em>the
+interpreter</em>--that is capable to do the actions prescribed in the script.
+ (This is done via association with the script extension or via special
+command at the beginning of the script.) Because of the way how it works, the
+interpreted languages are not so fast, not so powerful in comparison with
+compiled languages, and also their data types are somehow more limited.
+ Often, the part of a name of a variable indicates also the type.</p></div>
+<div class="paragraph"><p>Simply said, the work with variables is a bit magical in the scripting
+languages.  You never need to know their memory address.  As you
+usually write only simple scripts, you usually do not want to build more
+complex data structures.  You do not care how the memory is allocated.
+ (Anyway, the memory must be allocated dynamically.)</p></div>
+<div class="paragraph"><p>The interpreted languages may often be <em>weakly typed</em>.  Simply said,
+if the string value looks like a number, it can be treated as a number.
+ Because of that, you can use such value with numeric operators, for
+example.</p></div>
+<div class="paragraph"><p>The simpler languages often play <em>tit for tat</em>.  And we sometimes
+need something in between the simple scripting languages and the extremely powerful
+(fast running and expressive) compiled languages.  This can be done, and
+Python is the example of such language.  Before speaking about details of
+(also called) <em>dynamic languages</em>, we need to learn something more about
+indirect access to memory space (i.e. to the stored values).  It is a
+natural feature also in compiled languages; however, it is essential for
+dynamic languages.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_pointers">Pointers</h3>
+<div class="paragraph"><p>Oh the bloody pointers!  It is the theme where many programmers with less
+formal education and/or with not enough greed for knowledge fail.  When
+looking at, say, C++ source code without the knowledge, many students just give
+up and switch off their brain.  Possibly they have never got the
+satisfactory explanation.  Let&#8217;s enhance our imagination using the following
+pictures.  Let&#8217;s start the hard way&#8201;&#8212;&#8201;from the magical C++ source code to
+the abstract pictures. (No problem if you do not know the C++ language.  I
+will explain the necessary things.)</p></div>
+<div class="paragraph"><p>Let&#8217;s start with:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>int var;
+int *ptr;</code></pre>
+</div></div>
+<div class="paragraph"><p>The first line declares that there will be the variable named <code>var</code> of the
+type <code>int</code> (means <em>integer</em>).  The second line looks almost the
+same.  There will be variable <code>ptr</code> somehow related to the type <code>int</code>.
+ But what means the star?  The star changes the meaning of the
+declaration of the variable.  The variable will not be of the <code>int</code>.
+ It will be of the <em>pointer to int</em> type, instead.  Have a look
+at the following picture:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pointers.png" alt="Pointers." />
+</div>
+</div>
+<div class="paragraph"><p>The picture shows that both <code>var</code> and <code>ptr</code> variables need their memory
+space.  In other words, <em>pointer variable</em> is also <em>a variable</em>.
+ A pointer variable also stores a value.  The value could be called a
+pointer value.  Basically, it is the address of another memory.  As
+explained earlier, any variable needs memory space and the identification.
+ Any pointer variable needs that much space to be able to store the
+address.  If the hardware is capable to address directly say 4 GB (i.e.
+2<sup>32</sup> bytes), then the variable needs 32 bits (4 bytes) of memory to store the
+address.  However, if we use the 64-bit Operating System, then we say we
+can (theoretically) directly address 2<sup>64</sup> bytes of memory.  I do not
+believe you have that much memory in your computer.  Anyway, the pointer
+variables need 8 bytes in such case.</p></div>
+<div class="paragraph"><p>Let&#8217;s assign the values to the variables to see how to work with pointers:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/workingWithPointers.png" alt="Working with pointers." />
+</div>
+</div>
+<div class="paragraph"><p>You should already be very familiar with the fist assignment
+of the <code>2</code> to the <code>var</code> variable.  The earlier picture shows that the
+four bytes at the address 12 are filled with the binary representation of the
+value 2.  Notice, that the variable was given the memory space at the
+address 12.  The notation <code>&amp;var</code> means <em>the address of the variable</em>.
+ Now, the <code>ptr</code> variable is ready to store the address.  This
+way, the address 12 can be assigned to the pointer variable (see the second
+line on the picture).</p></div>
+<div class="paragraph"><p>Having the pointer value (i.e. the address 12) inside the pointer variable that
+is located on address 56 (see the picture above), we can access the memory
+space of the <code>var</code> variable also indirectly, through the pointer.  To
+do that, we have to read the content of the variable <code>ptr</code> located at the
+address 56, and then we have to use its content (12) to locate the memory at
+that address.  That&#8217;s all!  No extra magic.  Well, the syntax
+may have look magically&#8230;</p></div>
+<div class="paragraph"><p>The <code>*ptr</code> (with the star at in front of the name of the variable says:
+take the content of the <code>ptr</code> and use it for indirect access to another part of
+memory.  The process is named <em>dereferencing</em>.  The pointer
+variable <em>refers</em> to some other memory, and we want to access it.  As
+we have to explicitly use the star in front of the pointer variable, it is
+called <em>explicit dereferencing</em>.</p></div>
+<div class="paragraph"><p>Having the <em>access to the part of memory</em> means also the <em>write access</em>.
+ The last line on the picture shows that the memory space is assigned by
+new value <code>3</code>.  If you now read the variable <code>var</code>, you would get the
+value 3.  The memory space belongs to the <code>var</code> variable, but from
+now on it is not the only way how it can be accessed.</p></div>
+<div class="paragraph"><p>Does the pointer theme look so difficult to you now?  Is there anything
+more to be said?  Thinking about the principle, then nothing.  But,
+well, yes.</p></div>
+<div class="paragraph"><p>When talking about variables in compiled languages, we have said that the
+compiler converts the name to the address, deduces the size from the type of
+the variable, and uses the type for static checking during the compilation.
+ Is there anything about types at the last picture?  Well, yes.</p></div>
+<div class="paragraph"><p>The <code>*ptr = 3;</code> assigns the integer value.  The integer value can be
+assigned only to an integer variable.  How the compiler knows that this
+assignment is correct?  The answer is not that difficult.  It is more
+difficult to spot that the check must be done by the compiler.</p></div>
+<div class="paragraph"><p>The <code>ptr</code> was declared as <em>pointer to int</em>.  This way, it says
+that it point to the memory of the size that is capable to store the int value.
+ In other words, pointers in compiled languages are usually bound with
+some type.  And again, the type is used only for checking during
+compilation (hence the name <em>statically typed languages</em>).  The
+information about the type disappears when generating the binary executable.
+ Anyway, the pointers are <em>typed</em> in the compiled languages.</p></div>
+<div class="paragraph"><p>What about untyped pointers?  Are they possible?  Is it possible to
+have a pointer to any type?  The short answer is yes.  The pointer
+variable itself requires always the same amount of memory (4 bytes on 32-bit
+OS, 8 bytes on 64-bit OS).  It simply stores the address.  The
+problem is that then the compiler does not know how big is the block of memory
+that is pointed to.  The pointer variable stores no knowledge about the
+size of the target.  The programmer have to get the information from
+somewhere else.  One of the possibilities is to store the size of the
+pointed structure at the beginning of the structure.</p></div>
+<div class="paragraph"><p>What else?  NULL.  Or the similar name.  This is the special
+value that can be assigned a pointer variable of any type.  This means
+that you can assign it also, say, to the pointer to int.  This is the only
+pointer-value constant available.  It says: "the pointer points to
+nowhere."  Naturally, you cannot de-reference such pointer.  The
+"nowhere" can never be accessed.  If you try, the screaming
+sound&#8230; kidding, not screaming actually&#8230; the error is somehow announced.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_drawing_variables_and_pointers_symbolically">Drawing variables and pointers symbolically</h3>
+<div class="paragraph"><p>Our brain likes thinking in abstractions.  "No boring numbers,
+please.  I tend to forget them."  We always solve (sub)problem
+in our head first, and only then we write the idea down.  We use our
+imagination.  If it is too much to keep it in our brain, we draw it on a
+paper&#8230;</p></div>
+<div class="paragraph"><p>Also, we need some graphical abstraction <em>to be able to share</em> what we
+mean with others.  We want to keep the picture as abstract as possible, as
+simple as possible, but not simpler than needed.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pointersSchematically.png" alt="Pointers schematically." />
+</div>
+</div>
+<div class="paragraph"><p>The memory space for the variable is usually drawn as
+rectangle.  Again, a pointer variable is also a variable&#8201;&#8212;&#8201;it needs its
+rectangle too.  However, we want the pointer value be more abstract.
+ (Recall what the brain have said about the numbers.  Anyway, we do
+not know the exact addresses and we do not care.)  The only important
+thing for us is that the value points to another memory space (hence <em>the
+pointer</em>).  And the pointer should be pointed, right? ;)  To
+summarize, the pointer value is drawn as a fat dot with an arrow pointed to the
+other memory-space rectangle.</p></div>
+<div class="paragraph"><p>We also do not care how the NULL is implemented.  The only interesting
+feature is that it points to nowhere.  The "electric ground"
+mark is usually used.  That mark was very usual and well known to those
+who worked with first computers&#8201;&#8212;&#8201;not counting Charles Babbage
+(<a href="http://en.wikipedia.org/wiki/Babbage">http://en.wikipedia.org/wiki/Babbage</a>
+and "World&#8217;s First Computer Programmer" Ada Lovelace
+(<a href="http://en.wikipedia.org/wiki/Ada_Lovelace">http://en.wikipedia.org/wiki/Ada_Lovelace</a>).</p></div>
+<div class="paragraph"><p>Now, repeat "the pointers" until you really know what they are about.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_references">References</h3>
+<div class="paragraph"><p>The term <em>references</em> often causes confusion.  The main reason is
+that it can be used in different contexts.</p></div>
+<div class="paragraph"><p>The more abstract point of view is based on the idea that the reference value
+allows you to access some data (memory space) indirectly.  From that
+abstract point of view, the plain old pointers are also references.</p></div>
+<div class="paragraph"><p>However, the terms references and pointers are often discussed together, and
+there are some differences emphasized between them in the case.  Usually,
+the references are said to be de-referenced automatically when used (unlike the
+pointers).</p></div>
+<div class="paragraph"><p>The confusion has roots also in the fact that different programming languages
+think differently about references.  Some languages do not use the term
+references, some languages do not know pointers.  Some languages do not
+have any special syntax for references, and the fact of working with references
+internally may be completely hidden (this is also the case of Python&#8201;&#8212;&#8201;see
+later).</p></div>
+<div class="paragraph"><p>Back to the old compiled languages, here C++.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/references.png" alt="C++ reference." />
+</div>
+</div>
+<div class="paragraph"><p>The image shows the C++ syntax.  Ignore the syntactic details if you do not
+know the language.  What is important, the <code>ref</code> variable must be
+initialized when declared.  The reason is that it must always contain a
+reference to some already existing variable, i.e. to its allocated memory
+space.</p></div>
+<div class="paragraph"><p>Here the <code>ref</code> variable was located by the compiler/linker/loader at the
+address 75 (not important).  The important is that its memory space was
+filled with the address of the <code>var</code> variable immediately.  The C++
+restriction is that you cannot change the reference variable later.  Any
+usage of the <code>ref</code> has the same effect as using the variable <code>var</code>.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/workingWithReferences.png" alt="Working with references in C++" />
+</div>
+</div>
+<div class="paragraph"><p>The main difference from pointers is how the references look
+in the source code.  Once the reference variable is set, you can use it <em>as
+if it was another name for the pointed variable</em>.  In the example, the
+reference variable is named <code>ref</code> which forces you to think this way about
+it.  But imagine if it was named <code>myVar</code>.  When using a
+reference variable, it looks the same as if you worked with a normal, simple
+variable.  It is because the <em>automatic de-reference</em> is done (by
+compiler, for you).  Anyway, the target memory space is still accessed
+indirectly.</p></div>
+<div class="paragraph"><p>In other words, when you do not see the reference-variable declaration, you are
+not able to say if you work with a simple variable or (indirectly) with another
+variable.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_references_for_python">References for Python</h3>
+<div class="paragraph"><p>Python uses references internally a lot.  Let&#8217;s define the term <em>reference</em>
+the way we need for explanation of the Python internals.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/referencesSchematically.png" alt="References for explaining Python internals -- graphically" />
+</div>
+</div>
+<div class="paragraph"><p>We usually do not draw the references on the paper the same way as we do with
+pointer-based data structures.  Anyway, we can draw them the same way when
+explaining the internals.  Actually, the references are used in Python the
+very same way as pointers are used in other languages.  However, it is hidden
+from the programmer.  The reference value in Python (as elsewhere) needs
+always the same memory space to be stored (4 bytes on 32-bit systems, 8 bytes
+on 64-bit system).</p></div>
+<div class="paragraph"><p>However, Python is <em>a dynamic language</em> where memory space for the objects
+is always allocated in run-time, and where the name of any variable is kept
+intentionally in a string form inside Python&#8217;s internal data structures.</p></div>
+<div class="paragraph"><p>Why to call them <em>references</em> and not <em>pointers</em>?  This is
+because you will find no explicit de-referencing when working with Python.
+ But that&#8217;s not all!  There is one more indirection level when
+working with variables.  The topic will be discussed more in part 3.</p></div>
+<div class="paragraph"><p>A side note: There is nothing like NULL value for Python references.  This
+would break the concept of references.  However, there is the single
+object named <code>None</code> that plays the same role.  Whenever another
+object refers to <code>None</code>, it means that there is nothing more interesting
+there (if the fact is not interesting on its own).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_topics_to_be_discussed_in_part_3">Topics to be discussed in part 3</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Python as a dynamic language
+</p>
+</li>
+<li>
+<p>
+everything in Python is an object
+</p>
+</li>
+<li>
+<p>
+trivial Python built-in types
+</p>
+</li>
+<li>
+<p>
+container built-in types
+</p>
+</li>
+<li>
+<p>
+what is behind the assignment operation in Python
+</p>
+</li>
+<li>
+<p>
+containers and references
+</p>
+</li>
+<li>
+<p>
+Python approach variables (dict of <code>name-&gt;reference</code>)
+</p>
+</li>
+<li>
+<p>
+where the types are stored in Python
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_part_3">Part 3</h2>
+<div class="sectionbody">
+<div class="verseblock">
+<pre class="content">"The time has come," the Walrus said, "To
+talk of many things:
+Of sets&#8212;and lists&#8212;and dictionaries--
+Of variable kinks--
+And why you see it changing not--
+And why so strange are strings."</pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>This part describes how variables and references (see <a href="#part1">part 1</a>
+and <a href="#part2">part 2</a>) fit with Python, and how the <em>clearly strange</em> behaviour is not
+that strange when you know <em>only a little bit more</em> about the Python
+internals.  Some people may say: "Hey, they are not Python basics at
+all!"  The reality is that not having that little tiny bit of Python
+knowledge you will once stand schocked, with open mouth, staring at the
+behaviour of your program. Especially when you ARE a programmer (used to a
+compiled language).</p></div>
+<div class="paragraph"><p>If you find anything less understandable about variables and references in this
+article, have a look at
+<a href="#part2">Python illustrated (part 2)</a>.  Also, your feedback is
+warmly welcome.  It will form the problems illustrated in part 4.</p></div>
+<div class="sect2">
+<h3 id="_summary_for_python_variables_objects">Summary for Python variables/objects</h3>
+<div class="paragraph"><p>You may not like to read a lot of "theory" first, and you may want to
+search where the conclusion is.  "Does it make sense for me to read
+further?"  Good news for you&#8201;&#8212;&#8201;the summary from Python point of view
+comes first:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Everything in Python is an object. Any object has its unique <em>technical</em>
+identification (the memory address).  The information about its type is
+kept inside the object.
+</p>
+</li>
+<li>
+<p>
+The simplest objects are few constants, numeric values, and strings.
+ They are also stored as objects which means they have their own
+identification.  Once they are created, they cannot change their content.
+ They are <em>immutable</em>.
+</p>
+</li>
+<li>
+<p>
+More-complex built-in objects are lists, tuples, dictionaries, and sets.
+ They contain only <em>references</em> to other objects, not the objects
+itself.  Let&#8217;s call them <em>containers</em> (as it is usual also in other
+languages).  The references are untyped.  The type is bound to the
+target object.
+</p>
+</li>
+<li>
+<p>
+Any "native" assignment in Python means assigning the reference
+value.  It refers the target object that represents the assigned value. In
+other words, there will be one more counted reference to the target object after
+the assignment (counted by the target object).
+</p>
+</li>
+<li>
+<p>
+If any object is named, the name is stored as a key in one of the internal
+Python dictionary structures. The reference to the value object is the value of
+the dictionary item.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Now slowly, with pictures.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_everything_in_python_is_an_object">Everything in Python is an object</h3>
+<div class="paragraph"><p>Objects are not <em>the new thing</em> these days any more.  Objects as
+instances of their classes can be found everywhere.  Is there anything
+special about them in Python?</p></div>
+<div class="paragraph"><p>Every object in Python has its unique identification, and it is of some type
+(i.e. instance of some class).  The object can exist without any name.
+ The only two requirements for its existence are: 1) it must be created,
+and 2) it must be accessible via at least one reference. (Nothing very special.)</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/01PythonObjectsIdType.png" alt="Identification and the type of the object." />
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simplest_python_objects">Simplest Python objects</h3>
+<div class="paragraph"><p>The very basic objects in Python are boolean values (True, False), numeric
+values (int, float, complex), strings (plus some more).</p></div>
+<div class="paragraph"><p>The <em>most natural simple things in any programming language</em> are integer
+values and integer variables.  It is so natural that you can hardly
+imagine how the integer value could be expressed better than by simply typing
+the textual representation of the number in the source file.  What does it
+mean when we put it together with "everything in Python is an object"?</p></div>
+<div class="paragraph"><p>Run the Python interpreter in the interactive mode (simply type <strong>python</strong>
+without arguments in you console window) and try the following:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>c:\tmp\___python\__articles\03pythonVariables&gt;python
+Python 2.7.1 (r271:86832, Nov 27 2010, 17:19:03) [MSC v.1500 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; id(1)
+30628552L
+&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; id(a)
+30628552L
+&gt;&gt;&gt; b = 3 - 2
+&gt;&gt;&gt; b
+1
+&gt;&gt;&gt; id(b)
+30628552L
+&gt;&gt;&gt; id(5 - 4)
+30628552L</code></pre>
+</div></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/02IntegerObjectExample.png" alt="Example of the integer object." />
+</div>
+</div>
+<div class="paragraph"><p>Notice that simply typing <strong>1</strong>
+in the source code leads to the creation of the object that represents the
+value.  Looking better at the lines above, the <em>id()</em> function
+returns always the same identification independently on how you have got the
+value.  Then it must mean that all the cases share the same object of the
+integer type with the value 1.  This is a kind of optimization that does
+not affect the solved problem.  Actually, only some small integers have
+"a fixed identification".  If you try it with bigger integer
+values, separate objects are created. Try (or read and believe) the following:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; b = 1
+&gt;&gt;&gt; id(a)
+30628552L
+&gt;&gt;&gt; id(b)
+30628552L</code></pre>
+</div></div>
+<div class="paragraph"><p>Here the identifications are the same.  But try it with bigger numbers:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; a = 1500000
+&gt;&gt;&gt; b = 1500000
+&gt;&gt;&gt; id(a)
+36576600L
+&gt;&gt;&gt; id(b)
+36576576L</code></pre>
+</div></div>
+<div class="paragraph"><p>The identifications now differ.  The internal optimization was not used
+for the case.</p></div>
+<div class="paragraph"><p>If you are interested in more details, have a look for example at Laurent Luce&#8217;s Blog,
+<a href="http://www.laurentluce.com/posts/python-integer-objects-implementation/">Python
+integer objects implementation</a>.
+(I have just found his pages, no deep opinion, but they seem to be very good).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_a_note_about_the_type">A note about the type</h3>
+<div class="paragraph"><p>Actually, the instance of the object (its memory footprint) should be as small
+as possible. This means that the object itself should not store all details
+common for all instances of the same class.  In other words, it should NOT
+store also details about its type.  Technically, it is better to share a
+reference to another block of information&#8201;&#8212;&#8201;also expressed as an object in Python,
+like this&#8230;</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/03SeparatedTypeObject.png" alt="A separated type object." />
+</div>
+</div>
+<div class="paragraph"><p>There is another built-in function named <em>type()</em> in
+Python.  The documentation says that it that returns the reference to the
+related <em>type-object</em>.  When displaying the object, we can see the
+string like&#8230;</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; type(1)
+&lt;type 'int'&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>The text speaks for itself.  But, hey, "&#8230; returns the reference to
+the related <em>type-object</em>"?  Is the type object really
+separated?  If yes, it must be possible to get its identification and
+type. Let&#8217;s apply the earlier <em>id()</em> function to the type object:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; id(type(1))
+505997744L</code></pre>
+</div></div>
+<div class="paragraph"><p>Well, the type objects seems to be separated. (It has its own identification.)
+Then, what is the type of that type object?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; type(type(1))
+&lt;type 'type'&gt;</code></pre>
+</div></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/04IntWithTypeObject.png" alt="The integer object with the separated type object." />
+</div>
+</div>
+<div class="paragraph"><p>Are you confused?  If yes, then don&#8217;t worry.  You
+will get used to.  If it is too difficult for you now, think in terms <em>the
+type is bound to the object</em> that represents the value.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_some_other_simple_python_objects_types">Some other simple Python objects/types</h3>
+<div class="paragraph"><p>They are boolean constants, float numbers, complex numbers, and strings.
+ There is also a special type and the constant named <em>None</em>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; id(True)
+505930304L
+&gt;&gt;&gt; id(False)
+505930280L
+&gt;&gt;&gt; type(False)
+&lt;type 'bool'&gt;
+&gt;&gt;&gt; type(1.1)
+&lt;type 'float'&gt;
+&gt;&gt;&gt; 1+5j
+(1+5j)
+&gt;&gt;&gt; type(1+5j)
+&lt;type 'complex'&gt;
+&gt;&gt;&gt; type('some string')
+&lt;type 'str'&gt;
+&gt;&gt;&gt; None
+&gt;&gt;&gt; type(None)
+&lt;type 'NoneType'&gt;</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_values_of_objects_of_the_simple_types_can_never_be_changed">Values of objects of the simple types can never be changed!</h3>
+<div class="paragraph"><p>When working with objects in various programming languages, it is usual to
+think about the object as about a data space bound to some functionality (the
+methods).  It is very usual to think about them as about
+"capsules" that can change their internal state, i.e. change the
+content of their internal data variables.  This is not the case of the
+simple-type Python objects.</p></div>
+<div class="paragraph"><p>Any Python object of a simple type cannot change its value!  Once the
+object was created, it stores its initial value until the object is destroyed.
+ In other words, the object shown in the upper examples will always behave
+as constants. <strong>The objects of the simple types represent the captured value.
+ They never (logically) act as a memory space that could be reused for
+different values.</strong>  In other words, having reference value to some
+simple object, you can be sure that you always get the same value.</p></div>
+<div class="paragraph"><p>This fact may be surprising for many programmer, and it brings a whole lot of
+questions.  The true beginners just do not care.  Actually, is it
+that unnatural?  When working with the symbol <strong>1</strong> (one) in
+mathematics, you would never expect that the same symbol changed its internal
+value to 5.</p></div>
+<div class="paragraph"><p>There are reasons for the "strange decisions" of the authors of
+Python.  The reasons may not be immediately apparent.  One of the
+reasons is that the simple-type objects are to be shared heavily, because
+assigning the value means actually assigning the reference to the object.
+ It will be more apparent later.</p></div>
+<div class="paragraph"><p>There are also consequences of the constant nature of the objects of the simple
+types.  The consequences could be quite disturbing at first.  For
+example, ignoring the fact may lead to the very inefficient string processing
+in the sense of time/space complexity of operations.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_built_in_containers">Built-in containers</h3>
+<div class="paragraph"><p>The more-complex built-in types of objects are lists, tuples, dictionaries, and
+sets.  They are designed to <em>contain</em> other objects.  Because of
+that we call them <em>containers</em> (as it is usual also in other programming
+languages).</p></div>
+<div class="paragraph"><p>A list allows you to store and update a sequence of other objects (the order is
+preserved).  Tuple-type objecs are similar to lists, but they cannot be
+modified after creation. A dictionary stores pairs <em>key, value</em> where the
+key is used to access the value part (i.e. associative access; also known as a <em>map</em>
+or a <em>hash table</em>).  A set allows you to capture a set of objects.
+Sets can be tested, modified and otherwise manipulated using operations that
+are known from the set theory (mathematics).</p></div>
+<div class="paragraph"><p>It is extremely important for understanding how Python works, that all
+container objects always contain only the <em>references</em> to the objects
+representing the values.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_tuples_and_lists">Tuples and lists</h3>
+<div class="paragraph"><p>Tuples came from mathematics.  They contain certain number of elements in
+some order. A single tuple in Python can contain elements of more types.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; t = (1, 'some string', 3.5)
+&gt;&gt;&gt; t
+(1, 'some string', 3.5)</code></pre>
+</div></div>
+<div class="paragraph"><p>Now, how should we imagine the tuple object?  How it looks inside?</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/05TupleExample.png" alt="Example of a tuple object." />
+</div>
+</div>
+<div class="paragraph"><p>Surprised? The tuple object does not contain the elements inside.  The element
+objects are located outside, and they are bound to the tuple object only via
+refrences.  The value part of the tuple object from the example is
+actually only the array of three references.  In other words, a tuple
+stores the array of references of fixed size.  It means that the tuple
+object with three elements has always the same memory footprint&#8201;&#8212;&#8201;it uses the
+same amount of memory independently on how big are the element objects.</p></div>
+<div class="paragraph"><p>References in Python are always untyped&#8201;&#8212;&#8201;they are references to <em>any type</em>.
+ This means that the element of a tuple can be the object of <em>any
+type/class</em>.</p></div>
+<div class="paragraph"><p>There is one important thing to be mentioned.  The tuple object cannot be
+changed after it was created.  This means that its value is constant.
+ What does it <em>really</em> mean?  The static array of references cannot
+be changed.  If the refered element objects are also constant, then the
+logical value of the tuple remains the same "forever".</p></div>
+<div class="paragraph"><p>What about lists?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; lst = [1, 'some string', 3.5]
+&gt;&gt;&gt; lst
+[1, 'some string', 3.5]</code></pre>
+</div></div>
+<div class="paragraph"><p>How can we imagine the list object?</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/06ListExample.png" alt="Example of a list object." />
+</div>
+</div>
+<div class="paragraph"><p>The list object is very similar to the tuple objects.
+ But there is one significant difference.  The array of references
+(that act as the value of the object) is a dynamic array. It can change the
+number of elements.  Being capable of growing and/or shrinking, it also
+means that it makes also sense to be able to change the value of the existing
+references (to assign another reference value).  This means that the list
+object with the given identity can change completely during its lifetime.</p></div>
+<div class="paragraph"><p>So far, I tried to avoid using the variable names.  Why? It will be clear
+at the end of this part.  Anyway, it is neccessary to use the variable now
+for demonstration of the difference between the list and the tuple.  The <em>lst</em>
+variable was assigned the list object.  The same variable can be used
+later to call the <em>append()</em> method of the object.  The list object
+gets one more element (it becomes bigger; see the dashed-line parts of the
+above image).</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; lst = [1, 'some string', 3.5]
+&gt;&gt;&gt; lst
+[1, 'some string', 3.5]
+&gt;&gt;&gt; lst.append(True)
+&gt;&gt;&gt; lst
+[1, 'some string', 3.5, True]</code></pre>
+</div></div>
+<div class="paragraph"><p>When trying to do the same with the tuple object&#8230;</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; t = (1, 'some string', 3.5)
+&gt;&gt;&gt; t
+(1, 'some string', 3.5)
+&gt;&gt;&gt; t.append(True)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'tuple' object has no attribute 'append'</code></pre>
+</div></div>
+<div class="olist lowerroman"><ol class="lowerroman">
+<li>
+<p>
+not only that the tuple class does not define the <em>append()</em> method,
+but there is also no other way to modify the tuple.  You can think about
+the tuple object as about some <em>frozen list</em>.  The references inside
+the object cannot be assigned.  Also, the array of the references cannot
+grow.  There will always be three and only the three references inside, in
+this case.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>I know I am repeating what was said above.  But we have to be careful what
+does it mean.  The same tuple can actualy represent something that
+changes!  Let&#8217;s use the list as another element of the tuple.  Of
+course, the list object has to be created first.  (Note: I have to use the
+named variables again even though they will be explained later.  They will
+be drawn as separated references with the name on the image.  From now on,
+I am also going to use simplified visualization of the type information of the
+objects if it is apparent.)</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; lst = [1, 'some string', 3.5]
+&gt;&gt;&gt; lst
+[1, 'some string', 3.5]
+&gt;&gt;&gt; t = (1, 'some string', 3.5, lst)
+&gt;&gt;&gt; t
+(1, 'some string', 3.5, [1, 'some string', 3.5])</code></pre>
+</div></div>
+<div class="paragraph"><p>The list object referenced by the <em>lst</em> variable was included as the
+fourth element of the tuple. (It is a different tuple than in the earlier
+example.  It has four elements now.)  But the <em>lst</em> variable is
+still available, and it can be used to call the method of the referenced list
+object:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; lst.append(True)
+&gt;&gt;&gt; lst
+[1, 'some string', 3.5, True]</code></pre>
+</div></div>
+<div class="paragraph"><p>The list object changed.  What about the tuple that you may consider to be
+independent on the situation?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>[1, 'some string', 3.5, True]
+&gt;&gt;&gt; t
+(1, 'some string', 3.5, [1, 'some string', 3.5, True])</code></pre>
+</div></div>
+<div class="paragraph"><p>Ooops!  The tuple is different now!  And they say the tuple cannot be
+changed!  And this is true.  The tuple object value did not change
+because the references in the internal array are the same.  However, there
+is no way to display symbolicaly the list object other than using its
+representation.  The image explains it better:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/07TupleWithListElement.png" alt="A tuple with a list element." />
+</div>
+</div>
+<div class="paragraph"><p>If you payed attention, you may ask: "Where is the
+sharing of the <strong>1</strong> object?"  We can check the identifications
+(the numbers changed as they are usually different for each run of Python):</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; id(lst[0])
+31021656L
+&gt;&gt;&gt; id(t[0])
+31021656L
+&gt;&gt;&gt; id(lst[1])
+31160288L
+&gt;&gt;&gt; id(t[1])
+30854384L
+&gt;&gt;&gt; id(lst[2])
+31082424L
+&gt;&gt;&gt; id(t[2])
+31082400L</code></pre>
+</div></div>
+<div class="paragraph"><p>Notice that both the list and the tuple can be indexed (zero based) as if they
+were arrays.  Now you already know why!  It comes almost for free in
+the Python language, because both tuples and lists store the array of
+references inside.  Indexing here means getting the reference from the
+array on the index.  It is automatically dereferenced, and you have the
+access to the element object.</p></div>
+<div class="paragraph"><p>And yes, the identification of the integer objects from the list and from the
+tuple are the same.  It means that the object is the same, identical.
+ The object is shared even though there is no apparent explicit reason.
+ Recall that it is one of the Python interpreter optimizations.  Then
+the image should look like that:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/08TupleWithListElementOptimized.png" alt="The tuple with the list element -- optimized." />
+</div>
+</div>
+<div class="paragraph"><p>The most important conclusion so far is that containers always contain references to the
+objects with the value.  They do not store the value explicitly inside
+itself.  The "strange behaviour" usually means that the person
+who complains is not aware of the usage of references instead of target-object
+values.  Once you know that, you also know the positive consequences.
+ Working with the container of certain size take the same time
+independently on how complex are the element objects.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_sets">Sets</h3>
+<div class="paragraph"><p>The documentation says: "A <em>set</em> object is an unordered collection of
+distinct <em>hashable</em> objects."  Unlike a tuple of a list object,
+a set object does not capture the order of collected elements.  Try the
+following:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; mySet = set([1, 'some string', 3.5])
+&gt;&gt;&gt; mySet
+set(['some string', 1, 3.5])</code></pre>
+</div></div>
+<div class="paragraph"><p>Well, the strange syntax&#8230; The set type was added in Python version 2.4, which
+means quite late.  Actually, the above code does not use any special
+syntax.  You can even (re)define the <em>class set</em> that would be used
+the same way.  As we need to pass some initial elements when the object is
+created, we need some other container that contains them.  The authors of
+Python prefer a list.  However, you can pass also other iterable objects.
+ Try it with the tuple:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; set( (1, 'some string', 3.5) )
+set(['some string', 1, 3.5])</code></pre>
+</div></div>
+<div class="paragraph"><p>As for other types, if possible, the representation of the object has the form
+that could be copy/pasted to a source file to get the object with the same
+content.  Even though we passed a tuple, the representation shows the list
+as the argument.  This is because there is no captured knowledge what was
+passed to the constructor.  Notice also that the order of the elements in
+the sequence has changed.  This is because the set object does not caputre
+the initial order of elements either.</p></div>
+<div class="paragraph"><p>Newer versions of Python support also the new syntax for creation of a set
+object it uses curly braces&#8201;&#8212;&#8201;as usual in mathematics.  There is one
+exception.  The empty set cannot be expressed as <code>{}</code> because it is
+already used for empty dictionary object.  We must use <code>set()</code> or <code>set([])</code>
+instead:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; {1, 'some string', 3.5}
+set([3.5, 'some string', 1])
+&gt;&gt;&gt; set()
+set([])
+&gt;&gt;&gt; type(set())
+&lt;type 'set'&gt;
+&gt;&gt;&gt; {}
+{}
+&gt;&gt;&gt; type({})
+&lt;type 'dict'&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>"OK! Now I know how Python set work internally!"  Well, there
+are some kinks that you would not expect.  You may want to create the set
+like this:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/09SetObjectExampleKink.png" alt="The set object can be kinky ;)" />
+</div>
+</div>
+<div class="paragraph"><p>"No problem!"</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; set([1, 'some string', 3.5, True])
+set(['some string', 1, 3.5])</code></pre>
+</div></div>
+<div class="paragraph"><p>"Oops! Where is my <strong>True</strong>?"  Well, this may be quite
+surprising.  To explain that behaviour, we have to talk about hash values.
+ Probably the simplest way to demonstrate is to use the built-in function
+named&#8230;</p></div>
+</div>
+<div class="sect2">
+<h3 id="_hash">hash()</h3>
+<div class="paragraph"><p>The <em>hash(arg)</em> built-in function returns so called <em>hash value</em> of the
+passed argument.</p></div>
+<div class="paragraph"><p>Where the name <em>hash</em> came from&#8230; Do you now that food made of chopped
+meat?  Even when the resul looks differently than the raw meat, you can
+still guess that it was made of meat.  When you chop some vegetables, the
+result will look differently.  But if you chop another portion of the same
+kind of meat, the sample will look the same as the other meat sample.  You
+can take only small amount of the result of chopping, and you can still guess
+if it belongs to the chopped meat or to the chopped vegetable.  You can
+decide using the small sample, even though the samples differ from the
+originals.</p></div>
+<div class="paragraph"><p>The <em>hash()</em> function does the same with the object passed as the
+argument.  The sample has the form of an integer number.  When you
+get the same number, the source was somehow ekvivalent. Try:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; hash(1)
+1
+&gt;&gt;&gt; hash('some string')
+-604248944
+&gt;&gt;&gt; hash(3.5)
+1879113728</code></pre>
+</div></div>
+<div class="paragraph"><p>You can see that it always return some integer value.  However, not every
+object is <em>hashable</em>.  Try:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; hash([1, 2, 3])
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unhashable type: 'list'</code></pre>
+</div></div>
+<div class="paragraph"><p>In this case, the list is not hashable because it can change its content.
+ This means that the next time the object would return a different hash
+number.  Because of this, the concrete hash number cannot always represent
+the content of the content of the list object.</p></div>
+<div class="paragraph"><p>I will use the small square with a distinct colour to show the value of the
+hash of the object.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/10hashAsColour.png" alt="Illustration of hash values." />
+</div>
+</div>
+<div class="paragraph"><p>Now back to the set type.  The set always contains one value only once.
+ In other words, it contains unique values.  On the other hand, the
+set in Python can be used as a container for objects of different types.
+ We need some general mean to decide whether the object is inside the set
+or not.  Here comes the hash value of the object.</p></div>
+<div class="paragraph"><p>When testing whether the object is inside the set or not, we calculate <em>hash(obj)</em>
+first.  Then we can check, whether the object with the same hash value is
+inside.  The hash function has also one important feature.  It can be
+easily transformed to the index of an array element.  When being lucky,
+the element contains information about the object with the same hash value.
+ When being not so lucky, there is a conflict (two hash values converted
+to the same index).  The conflict must be resolved by some additional
+mechanism.  You can find the reference to more detailed article below in
+the section describing dictionaries.  The internal array must be bigger
+than the number of elements to minimize the conflicts.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/11SetHashAndUniqueness.png" alt="A set" />
+</div>
+</div>
+<div class="paragraph"><p>However, there is one kink with Python hash values.  Sometimes, different objects
+may have the same hash value:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; hash(1)
+1
+&gt;&gt;&gt; hash(1.0)
+1
+&gt;&gt;&gt; hash(1+0j)
+1
+&gt;&gt;&gt; hash(True)
+1</code></pre>
+</div></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/12sameHash.png" alt="Objects with the same hash value." />
+</div>
+</div>
+<div class="paragraph"><p>This is the reason, why the <em>True</em>
+was not inserted into the set in the earlier example.  When searching for
+the index in the internal array, the hash value of the True object was already
+found at the index.  The insertion algorithm decides only based on the
+hash value, even though the object present in the set represents the <em>1</em>
+(of the integer type).  Because of that simplification, Python interpreter
+decided not to insert <em>object with the same value</em> again. There are always
+some tradeoffs when you look deep enough.  Everywhere.</p></div>
+<div class="paragraph"><p>A final note related to hashability.  An object of the same type can be
+sometimes hashable and sometimes not.  For example a tuple object:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; type( (1, 'some string', 3.5) )
+&lt;type 'tuple'&gt;
+&gt;&gt;&gt; hash( (1, 'some string', 3.5) )
+1562160248
+&gt;&gt;&gt; type( (1, 'some string', 3.5, []) )
+&lt;type 'tuple'&gt;
+&gt;&gt;&gt; hash( (1, 'some string', 3.5, []) )
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unhashable type: 'list'</code></pre>
+</div></div>
+<div class="paragraph"><p>If the tuple contains only hashable items, then the whole tuple is hashable.
+This means that we can get the number that can be used as a signature of
+the object.  However, when the tuple contains a list, it is not hashable
+any more.  This is because the content of the list object can be modified,
+and there is no fixed number that could represent the tuple content.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_mutable_and_immutable_8230_what_does_it_mean">Mutable and immutable&#8230; What does it mean?</h3>
+<div class="paragraph"><p>When reading the Python documentation or articles, you will definitely find the
+terms <em>mutable</em> or <em>immutable</em>.  Fancy words, simple meaning.
+ A mutable object can be changed (its content) during lifetime.  An
+immutable object cannot change its content after it was created.  In other
+words, immutable means <em>with the constant content</em>, mutable means <em>with
+the content that can be modified</em>.  But remember, that the content of
+the container is the array of references.  If the container is immutable
+(e.g. of the tuple type), then only the references are constant.  Some or
+all of the refered objects may still be mutable.</p></div>
+<div class="paragraph"><p>So, what are the immutable types that we have mentioned so far?  All
+simple built-in types are immutable: integer, float, complex, string.  The
+tuple type is immutable.  There is also the immutable version of the set
+type.  The type is called <em>frozenset</em>.</p></div>
+<div class="paragraph"><p>Why so much about hashability and mutability?  We will use that term
+later.  There is one type heavily used in Python as another type that is
+based on hashing.  The type is named <em>dict</em>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_dictionaries">Dictionaries</h3>
+<div class="paragraph"><p>Dictionary type is one of the major data types in Python.  It must be
+implemented very efficiently not only because <em>you</em> want to use it, but
+also because the Python interpreter uses it even when you are not looking.</p></div>
+<div class="paragraph"><p>What the doc says about the dictionary type&#8230;</p></div>
+<div class="paragraph"><p>A <em>mapping</em> object maps hashable values to arbitrary
+objects. Mappings are mutable objects. There is currently only one standard
+mapping type, the dictionary. [&#8230;]</p></div>
+<div class="paragraph"><p>A dictionary’s keys are almost arbitrary values. Values that are not hashable
+[&#8230;] may not be used as keys. Numeric types used for keys obey the normal
+rules for numeric comparison: if two numbers compare equal (such as 1 and 1.0)
+then they can be used interchangeably to index the same dictionary entry.</p></div>
+<div class="paragraph"><p>As for the mentioned numeric types for keys, we already know
+why it is so.  This is because the hash value of the keys plays the role
+when accessing the items of a dictionary.  If you understand the above <em>set</em>
+type, it will not be difficult to understand the <em>dict</em> type for you.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; dict()
+{}
+&gt;&gt;&gt; {}
+{}
+&gt;&gt;&gt; type({})
+&lt;type 'dict'&gt;
+&gt;&gt;&gt; type(dict())
+&lt;type 'dict'&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>A dictionary object can be created the same way as any other object&#8201;&#8212;&#8201;via
+calling the class name as if it were a function (see the <em>dict()</em>).
+(You may prefer to name this as "using the class constructor",
+but there area some differences in Python, and it does not define the term <em>constructor</em>
+explicitly.</p></div>
+<div class="paragraph"><p>However, there is also a special syntax for creating a dictionary object in
+Python.  It uses curly braces.  Using empty curly braces mean
+creating an empty dictionary.  (A side note: This works in Python from
+early days.  Do you remember the new syntax for creating the set objects?
+ Here is the reason why the empty set cannot be created this way.)</p></div>
+<div class="paragraph"><p>Usually, dictionary objects are created and initialized using the special
+syntax with curly braces.  In some cases, we need to prescribe the content
+of the dictionary explicitly in the source code.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}
+{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
+</div></div>
+<div class="paragraph"><p>Notice that the representation of the just created dictionary has the same
+form.  Notice where the spaces are placed and where they are not.
+ This may be a minor issue.  Still, keeping the style helps to make
+your programs more readable.  If you get used to, you will also more easily
+swallow the sources written by the others.</p></div>
+<div class="paragraph"><p>Notice also, that the representation of the above dictionary content shows the
+items in a different order.  The reason is the same as in the set type.
+ A dictionary organizes the items inside differently than say a list type.
+ There is no way to get the original order.</p></div>
+<div class="paragraph"><p>Sometimes we get data from other sources in another form, and we want to fill
+the dictionary with them.  The following example show the list of tuples
+that is used for initialization:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; dict([('a', 1), ('bb', 'some string'), (5, 3.5), ('xxx', True)])
+{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
+</div></div>
+<div class="paragraph"><p>The <em>dict()</em> constructor is capable to consume whatever sequence of
+tuples.  This means that it can be a tuple of tuples instead of the list
+of tuples.  It can also be set of tuples.  The rule is that the
+dictionary initialize have to be able iterate through the items and then the
+item must contain two ordered elements&#8201;&#8212;&#8201;the key and the value:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; dict( (('a', 1), ('bb', 'some string'), (5, 3.5), ('xxx', True)) )
+{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
+</div></div>
+<div class="paragraph"><p>Notice a kind of strange example that shows a tuple of strings with two
+characters.  It also meets the rules.  The two-char string is split
+to two chars.  The first one is used as the key, the other as the value.
+ (But this is purely for illustration of how it works.  Do not search
+for any meaningful usage of the case.)</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; dict( ('aA', 'bB', 'cC') )
+{'a': 'A', 'c': 'C', 'b': 'B'}</code></pre>
+</div></div>
+<div class="paragraph"><p>A dictionary works as an associative array.  Therefore the syntax directly
+reflects the idea.  You can use a key value as if it was an index.
+ You can read the existing value, and you can assign both the existing
+item (i.e. modification) or the new item (i.e. creation).  We can also
+delete an element using the <em>del</em> statement.  (We need the variable
+name for that.  The variables will be explained a bit later, as said
+earlier.)</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}
+&gt;&gt;&gt; d['a']
+1
+&gt;&gt;&gt; d['bb']
+'some string'
+&gt;&gt;&gt; d[5]
+3.5
+&gt;&gt;&gt; d['xxx']
+True
+&gt;&gt;&gt; d[0]
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: 0
+&gt;&gt;&gt; d[0] = 'new string'
+&gt;&gt;&gt; d[0]
+'new string'
+&gt;&gt;&gt; d
+{'a': 1, 0: 'new string', 'xxx': True, 5: 3.5, 'bb': 'some string'}
+&gt;&gt;&gt; del d[0]
+&gt;&gt;&gt; d
+{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_dictionary_illustrated">Dictionary illustrated</h3>
+<div class="paragraph"><p>The time has come to have a look inside.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/13dict.png" alt="A dictionary internals." />
+</div>
+</div>
+<div class="paragraph"><p>There is plenty of objects here.  However, keep in mind that the dictionary
+contains only references to them.  Whatever you do with the dictionary,
+you modify only the internal array of references.</p></div>
+<div class="paragraph"><p>When searching associatively for a value, the hash value of the key is
+calculated.  The hash value is transformed into the index to the internal
+hash table.  If there is no conflict, you get the reference to the value
+object very quickly.</p></div>
+<div class="paragraph"><p>The hash value of the value object does not play any role.  Therefore, it
+is not illustrated at the value objects.  Actually, the value object need
+not to be hashable and it may not be possible to calculate their hash value.
+ For example, the value object could be a list or a dictionary.</p></div>
+<div class="paragraph"><p>If you are interested in implementation of dictionaries, you can find more
+detais at <a href="http://www.laurentluce.com/posts/python-dictionary-implementation/">http://www.laurentluce.com/posts/python-dictionary-implementation/</a>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_variables_2">Variables</h3>
+<div class="paragraph"><p>Now it comes.  What really are the variables in Python?  Variables in
+Python are named references.  The name is stored in memory during runtime.
+ It is not lost during compilation as in classical compiled languages.
+ A Python variable has no type associated to the name (unlike in compiled
+languages).  This is because a Python variable stores always the same type
+of value.  It stores a reference to the target object.</p></div>
+<div class="paragraph"><p>And how the names and the references are bound together.  You may have
+already guessed.  The variable names are keys to a hidden dictionary (used
+by the Python interpreter for the purpose).  The references to the targets
+are at the value side of that dictionary.</p></div>
+<div class="paragraph"><p>Actually, the hidden dictionaries are not that hidden.  There are
+functions that gives you the access to the dictionaries.  One of them is
+the built-in function named <em>globals()</em>.</p></div>
+<div class="paragraph"><p>Start the Python interpreter in interactive mode from scratch and try the
+following:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Python 2.7.1 (r271:86832, Nov 27 2010, 17:19:03) [MSC v.1500 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; d = {'a': 1, 'bb': 'some string', 5: 3.5, 'xxx': True}
+&gt;&gt;&gt; d
+{'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'}
+&gt;&gt;&gt; var1 = 4
+&gt;&gt;&gt; var2 = 'whatever string'
+&gt;&gt;&gt; var3 = False
+&gt;&gt;&gt; g = globals()
+&gt;&gt;&gt; type(g)
+&lt;type 'dict'&gt;
+&gt;&gt;&gt; g
+{'var1': 4,
+ 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'},
+ 'var3': False,
+ 'var2': 'whatever string',
+ '__builtins__': &lt;module '__builtin__' (built-in)&gt;,
+ '__package__': None,
+ 'g': {...},
+ '__name__': '__main__',
+ '__doc__': None}</code></pre>
+</div></div>
+<div class="paragraph"><p>Notice the last variable named <em>g</em>, that was assigned the result of the <em>globals()</em>.
+ Next, we have tried it is of the <em>dict</em> type.  In other words,
+it is a normal dictionary, indistinguishable from other dictionary objects.
+ When displaying its representation, we can see all the defined variables
+inside, plus some more.  (The dictionary representation was manually
+formatted to make the dictionary items more visible.)</p></div>
+<div class="paragraph"><p>Notice that even the <em>g</em> name is inside.  But its value cannot be
+easily represented as it points to itself.  Let&#8217;s illustrate it!</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/14globals.png" alt="Variables are implemented via system-dictionary objects." />
+</div>
+</div>
+<div class="paragraph"><p>The reason for using the dark yellow colour of the object is to emphasize that they were
+created by the Python interpreter for its internal purpose.  Otherwise,
+the object are quite normal objects of their type.</p></div>
+<div class="paragraph"><p>There are some restictions for identifiers in any programming language. They
+usually must be compound of letters, numerals, and some special characters
+(e.g. undercore).  To make it short, the keys in the hidden dictionary
+must be of the string type.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_assignment_operation">Assignment operation</h3>
+<div class="paragraph"><p>Now it should be clear that the assignment to a variable means that the string
+form of its name is or found in the appropriate internal dictionary as a key,
+or the item for the key is created.  The assigned value is always some
+object.  The reference to the object is used as the value part of the
+dictionary.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_more_variables">More variables</h3>
+<div class="paragraph"><p>What about the dirty idea to create dynamically a variable that was not given
+its identifier in the source code.  Say, its name could be dynamically
+created, read from a text file or whatever.  Here we simulate it by
+assigning the <em>s</em> variable.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; s = 'myVariable'
+&gt;&gt;&gt; g[s] = 12345
+&gt;&gt;&gt; g
+{'var1': 1,
+ 'd': {'a': 1, 'xxx': True, 5: 3.5, 'bb': 'some string'},
+ 'var3': False,
+ 'var2': 'whatever string',
+ '__builtins__': &lt;module '__builtin__' (built-in)&gt;,
+ '__package__': None,
+ 'myVariable': 12345,
+ 'g': {...},
+ 's': 'myVariable',
+ '__name__': '__main__',
+ '__doc__': None}</code></pre>
+</div></div>
+<div class="paragraph"><p>See, the <em>myVariable</em> with the content 12345 is there!  Can we use
+the newly created variable name as if it was defined in the source text?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; myVariable
+12345</code></pre>
+</div></div>
+<div class="paragraph"><p>It works!  Notice that it is very different in programming languages to
+write an identifier and write a string literal with the same name inside.</p></div>
+<div class="paragraph"><p>Warning: the <em>globals()</em> name suggests that it stores global variables.
+ However, the dictionary stores only top-level variables <em>inside a
+module</em>.  There is that many of such dictionaries, how many modules is
+used in your program.  There also is the built-in <em>locals()</em> function
+that returns the dictionary of local variables.  However, you should never
+modify it.</p></div>
+<div class="paragraph"><p>The above illustration shows how variables are implemented in Python.
+ However, it looks quite complex on its own.  To simplify the
+illustration of used variables, I will use pictures like the following.
+ It illustrates the same case&#8201;&#8212;&#8201;except the <em>g</em> variable.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/15variablesSimplified.png" alt="Illustration of variables -- simplification." />
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_some_final_notes">Some final notes</h3>
+<div class="verseblock">
+<pre class="content">And why you see it changing not--
+And why so strange are strings.</pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>"Oh, now I know! Assigning a variable means sharing the object via another
+reference&#8230;"</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; lst1 = ['first', 'list']
+&gt;&gt;&gt; lst2 = lst1
+&gt;&gt;&gt; lst1
+['first', 'list']
+&gt;&gt;&gt; lst2
+['first', 'list']
+&gt;&gt;&gt; lst2.append('extended')
+&gt;&gt;&gt; lst2
+['first', 'list', 'extended']
+&gt;&gt;&gt; lst1
+['first', 'list', 'extended']</code></pre>
+</div></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/16sharedList.png" alt="The list object is mutable." />
+</div>
+</div>
+<div class="paragraph"><p>"Oh, yes.  I have told you!"  What about this?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&gt;&gt;&gt; s1 = 'first string'
+&gt;&gt;&gt; s2 = s1
+&gt;&gt;&gt; s1
+'first string'
+&gt;&gt;&gt; s2
+'first string'
+&gt;&gt;&gt; s2 = s2 + ' extended'
+&gt;&gt;&gt; s2
+'first string extended'
+&gt;&gt;&gt; s1
+'first string'</code></pre>
+</div></div>
+<div class="paragraph"><p>Why the list object behaves as expected (when knowing we work via references),
+and why the string behaves so strangely?  Is there any exception?  Do
+string variables also use references to the string object?  Aren&#8217;t they
+implemented somehow differently?</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/17modifySharedString.png" alt="Strings are immutable." />
+</div>
+</div>
+<div class="paragraph"><p>I hope it is the "Aha!" moment for you.  The key difference is
+that the list objects are mutable.  This means that the <em>.append()</em>
+method is able to modify the same object.  However, strings are immutable.
+ The concatenation operator (+) cannot modify the original string object.
+ The string object with the value <em>' extended'</em> must be created
+first, then the + operator puts the values of the two strings together and
+creates another string object.  Only after that the <em>s2</em> variable is
+assigned the reference to the newly created object.  Therefore the <em>s1</em>
+and <em>s2</em> cannot point to the same object.  (The string object with
+the value <em>' extended'</em> exists only temporarily.  It is not
+referenced later, and it will be destroyed by the garbage collector.)</p></div>
+<div class="paragraph"><p>If you want to learn more about implementation of strings, see
+<a href="http://www.laurentluce.com/posts/python-string-objects-implementation/">http://www.laurentluce.com/posts/python-string-objects-implementation/</a></p></div>
+<div class="paragraph"><p>(The end of the part 3)</p></div>
+</div>
+<div class="sect2">
+<h3 id="_part_4_will_reflect_your_questions_plus_8230">Part 4 will reflect your questions, plus&#8230;</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+some consequences of the above,
+</p>
+</li>
+<li>
+<p>
+user defined classes.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2015-10-05 22:04:20 Střední Evropa (letní čas)
+</div>
+</div>
+</body>
+</html>

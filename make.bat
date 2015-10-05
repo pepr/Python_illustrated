@@ -1,1 +1,1 @@
-py d:\Software\asciidoc\asciidoc3.py Python_illustrated.txt 
+py d:\Software\asciidoc\asciidoc3.py -o Python_illustrated.html en/Python_illustrated.txt 
