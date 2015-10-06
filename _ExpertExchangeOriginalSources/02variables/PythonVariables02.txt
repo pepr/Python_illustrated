@@ -1,0 +1,169 @@
+Python basics -- illustrated (part 2)
+=====================================
+[subtitle]Less strange, but still introduction[/subtitle]
+
+This introduction was added (1st August, 2011) to reflect some reactions.  Firstly, the term [i]basics[/i] in the title of the article...  As any other word, it is a symbol with meaning attached to the word by some agreement.  Still, we always have to think in some context to understand the agreement.  You may say that what is described in this and previous articles is not related to [i]Python basics[/i] at all.  It could be because you expect a text written in some context that you met when reading some other "basics".  The article serie could be renamed to [i]Python foundation[/i] or [i]Python internals[/i].  However, the later terms are [i]more technical[/i], and I do not think it would help you to understand what I want to write about.  Instead, I am asking you to change the context of thinking about it.  Tutorials often start with the simplest example that shows a working program (say "Hello, World!" -- it is also a kind of unspoken agreement bound to the "creation of a tutorial").  This is understandable.  There are many ways of how to attract a beginner's attention.  The context of "basics" in this serie is based on "what you should know to understand".  I am focusing on "mental pictures of what is done" rather than on "how to write the block of code".  For that, I need also the text of this second part.  I am aware of the situation that you may want to skip these two articles with disagreement. ("Not related to Python at all!")  In the same time I believe, that the information will be usefull for those how find some knowledge gaps when reading the next part 3.
+
+The previous part 1 (http:A_5354-Python-basics-illustrated-part-1.html) explained where the term "variable" came from, how we can think about it, what it represents, how the variables are related to mathematics on one side, and to computers on the other side.  This part (2) is focused on more details that you have to understand if you really want to be good in thinking about variables (creating a mental picture) and about using them in programming languages.
+
+For explaining principles of working with variables, we need some excursion outside the Python point of view.  This part describes variables in context of traditional compiled languages to show some details.  Let's talk about pointers and references.  Good understanding will be neccessary to swallow the part 3.
+
+
+[subtitle]Variables in the (old) compiled languages[/subtitle]
+
+Let's think about the equation [i]a + b = 5[/i] as about the boolean expression that returns--for the given content of variables [i]a[/i] and [i]b[/i]--the boolean value that indicates whether the values are the solution for the equation.
+
+IMAGE compiled variables
+
+This is a fragment of a souce code in the C language.  The "C" is not important here.  Let it simply be the example of a classical procedural compiled language.  In such case, the source text is converted to the machine code via a compiler and a linker. The [i]names[/i] of the variables are totally replaced by addresses, by register names/numbers, or the values are optimized to be the parts of the generated machine instructions.  There is no trace of strings like "a", "b", or "result" in the generated executable.  The only exception is when you generate so called [i]debug[/i] version of the executable and you explicitly tell the compiler to remember the original names from the source code; however, the computer does not need that.  Only the human, the programmer wants the names be present in the debug info to make the compiled code more readable when debugging.
+
+From that point of view, [i]a name of a variable to a human programmer[/i] is in the similar relation as [i]an address of a memory space to a processor[/i]. The name of the variable is [i]directly bound to the address[/i].  Or YOU work with the name as with the string (in the source code) or the COMPILER works with the address that is the result of the compilation of the name of the variable (in the binary, executable code). 
+
+
+[subtitle]Technical representation of a variable[/subtitle]
+
+Technically, the variable needs the memory space and the identification to be usefull for a program.  The identification without the memory space makes no sense -- one cannot store anything inside.  The memory space without the identification is useless either -- one cannot access the memory space.
+
+We were speaking about [i]variables[/i] in the previous part.  However, the same holds for objects, i.e. for the memory space that is used to store the data of the object.  Better to say, anything in Python is an object that can be identified, including the things that are called variables in some languages.  But stay tuned, the details will be explained later.  The topic is not that easy as you may think at first. (There are more situations like that. Say, the [i]strings[/i] -- the topic "well known from the time of written history". Or not? See http://diveintopython3.org/strings.html).
+
+The memory address serves as a good technical identifier.  It is unambiguous. Moreover, you need no transformation to get the information where the memory is located. The major Python implementations also take that approach -- the address is equal to the technical identification of any variable (or of any object).  Having any object [b]obj[/b] in Python, you can apply the built-in function [b]id(obj)[/b] to get the identification.  (However, other Python implementations are free to use a different kind of identification in future. Think about a distributed computing environment where there is no single, shared memory address space. The address is ambiguous in such systems unless it is extended by some extra information about the location of the memory/computer.)
+
+What about the size of the reserved memory space?  When you need to store a boolean value, one bit would be enough.  As you cannot address one single bit, the smallest possible piece of memory, one byte, is often used.  If you want to store an integer, you usually think about 4 or more bytes.  It depends on the programming language, on the compiler, and also on the hardware. (In Python, integer variables are not that limited.  The space for one integer value may vary depending on the actual value.)  
+
+To summarize, the memory space depends on the type of the value and sometimes also on the actual value (think about a string of a different length in whatever language].  In compiled languages, the size of trivial types is known.  Therefore, the size of memory is related to the type.  However, the information about the type is used/processed only during the compilation.  Similarly to variable names, the type is used only to check statically if the things are done in a correct way.  During the compilation, the type-name information is lost, and the related size of memory is present as numbers in the executable.
+
+
+[subtitle]Where the memory space is located?[/subtitle]
+
+Think about a simple situation.  You have a normal computer with one processor and with one RAM (Random Access Memory).  The RAM address goes (for simplicity) from zero to 4.000.000.000.  The variable needs say eight bytes.  Where the eight bytes are to be located?
+
+"I don't care."  And you are right.  The machine and the compiler should care.  Anyway, the code needs to know the location.  Where the knowledge about the location is stored?
+
+The [i]compiled-language sources[/i] are processed by the compilers that consume the source texts and convert them to the machine code.  In such case, the knowledge about the location must be hidden somewhere in the code.  Otherwise the code would not be able to access that portion of memory (i.e. what once was the name of the variable).  In the case, [i]the address[/i] of the memory must be hidden in the code.  But how?
+
+Roughly said (i do not want to go into too much details):
+
+[bullet]The address can be a constant, and the related memory was once (in the source text) called [i]a static variable[/i]. Such a variable keeps the content during the lifetime of the program and its content changes only when it is explicitly changed by the code.[/bullet]
+
+[bullet]The address is computed relatively -- by adding the numeric offset to some base address (in some register) of the memory subspace.  (This is done as the part of the low-level instruction behaviour -- no human-related programming like "take the register content, add 5, and assign...)  Think about a function that uses its own, local variables.  When the function is called, it gets a block of memory big enough for storing its local variables.  The local variable is located relatively to the beginning of the allocated block.  The block is released when the function returns.[/bullet]
+
+[bullet]The memory is allocated dynamically, during the running time via calling some function (like [i]malloc()[/i] in C) or via some other action bound to the dedicated keyword (like [i]new[/i]).  In such case, the address is known only after the data space was created (when the program is already running), and the address must be stored somewhere for the later reference.  No name is bound to such memory space -- even in compiled languages.  The size was deduced from the prescribed type ([i]new[/i]) or it was given explicitly to the function ([i]malloc()[/i]).  In the first case, the compiler keeps track about the size derived from the type.  In the later case ([i]malloc()[/i]), a programmer is responsible for working correctly within the allocated space.[/bullet]
+
+[subtitle]Scripting languages[/subtitle]
+
+There was a time when so called [i]scripting languages[/i] appeared (think about the Unix shell scripts or the Windows batch files).  A command processor (say [i]bash[/i] or [i]cmd[/i] takes the source text called [i]a script[/i] line by line and interprets the commands written in the file.  These languages are also called [i]interpreted[/i].  This is because of when and how the source text is processed when the script is launched.  There are no binary native instructions stored in the executed script file.  The source text is read and interpreted immediately.  Of course, the script has to be interpreted by some binary executable program--[i]the interpreter[/i]--that is capable to do the actions prescribed in the script.  (This is done via association with the script extension or via special command at the beginning of the script.) Because of the way how it works, the interpreted languages are not so fast, not so powerful in comparison with compiled languages, and also their data types are somehow more limited.  Often, the part of a name of a variable indicates also the type.
+
+Simply said, the work with variables is a bit magical in the scripting languages.  You never need to know their memory address.  As you usually write only simple scripts, you usually do not want to build more complex data structures.  You do not care how the memory is allocated.  (Anyway, the memory must be allocated dynamically.)
+
+The interpreted languages may often be [i]weakly typed[/i].  Simply said, if the string value looks like a number, it can be treated as a number.  Because of that, you can use such value with numeric operators, for example.
+
+The simpler languages often play [i]tit for tat[/i].  And we sometimes need something in between the simple scripting languages and the extremely powerful (fast running and expresive) compiled languages.  This can be done, and Python is the example of such language.  Before speaking about details of (also called) [i]dynamic languages[/i], we need to learn something more about indirect access to memory space (i.e. to the stored values).  It is a natural feature also in compiled languages; however, it is essential for dynamic languages.
+
+
+[subtitle]Pointers[/subtitle]
+
+Oh the bloody pointers!  It is the theme where many programmers with less formall education and/or with not enough greed for knowledge fail.  When looking at, say, C++ source code without the knowledge, many students just give up and switch off their brain.  Possibly they have never got the satisfactory explanation.  Let's enhance our imagination using the following pictures.  Let's start the hard way -- from the magical C++ source code to the abstract pictures. (No problem if you do not know the C++ language.  I will explain the neccessary things.)
+
+Let's start with:
+
+[code]
+int var;
+int *ptr;
+[/code]
+
+The first line declares that there will be the variable named [i]var[/i] of the type [i]int[/i] (means [i]integer[/i]).  The second line looks almost the same.  There will be variable [i]ptr[/i] somehow related to the type [i]int[/i].  But what means the star?  The star changes the meaning of the declaration of the variable.  The variable will not be of the [i]int[/i].  It will be of the [i]pointer to int[/i] type, instead.  Have a look at the following picture:
+
+IMAGE pointers
+
+The picture shows that both [i]var[/i] and [i]ptr[/i] variables need their memory space.  In other words, [i]pointer variable[/i] is also [i]a variable[/i].  A pointer variable also stores a value.  The value could be called a pointer value.  Basically, it is the address of another memory.  As explained earlier, any variable needs memory space and the identification.  Any pointer variable needs that much space to be able to store the address.  If the hardware is capable to address directly say 4 GB (i.e. 2^32 bytes), then the variable needs 32 bits (4 bytes) of memory to store the address.  However, if we use the 64-bit Operating System, then we say we can (theoretically) directly address 2^64 bytes of memory.  I do not believe you have that much memory in your computer.  Anyway, the pointer variables need 8 bytes in such case.
+
+Let's assign the values to the variables to see how to work with pointers:
+
+IMAGE working with pointers
+
+You should already be very familiar with the fist assignment of the 2 to the [i]var[/i] variable.  The earlier picture shows that the four bytes at the address 12 are filled with the binary representation of the value 2.  Notice, that the variable was given the memory space at the address 12.  The notation [i]&var[/i] means [i]the address of the variable[/i].  Now, the [i]ptr[/i] variable is ready to store the address.  This way, the address 12 can be assigned to the pointer variable (see the second line on the picture).
+
+Having the pointer value (i.e. the address 12) inside the pointer variable that is located on address 56 (see the picture above), we can access the memory space of the [i]var[/i] variable also indirectly, through the pointer.  To do that, we have to read the content of the variable [i]ptr[/i] located at the address 56, and then we have to use its content (12) to locate the memory at that address.  That's all!  No extra magic.  Well, the syntax may have look magically...
+
+The [i]*ptr[/i] (with the star at in front of the name of the variable says: take the content of the ptr and use it for indirect access to another part of memory.  The process is named [i]dereferencing[/i].  The pointer variable [i]refers[/i] to some other memory, and we want to access it.  As we have to explicitly use the star in front of the pointer variable, it is called [i]explicit dereferencing[/i].
+
+Having the [i]access to the part of memory[/i] means also the [i]write access[/i].  The last line on the picture shows that the memory space is assigned by new value 3.  If you now read the variable [i]var[/i], you would get the value 3.  The memory space belongs to the [i]var[/i] variable, but from now on it is not the only way how it can be accessed.
+
+Does the pointer theme look so difficult to you now?  Is there anything more to be said?  Thinking about the principle, then nothing.  But, well, yes.
+
+When talking about variables in compiled languages, we have said that the compiler converts the name to the address, deduces the size from the type of the variable, and uses the type for static checking during the compilation.  Is there anything about types at the last picture?  Well, yes.
+
+The [i]*ptr = 3;[/i] assigns the integer value.  The integer value can be assigned only to an integer variable.  How the compiler knows that this assignment is correct?  The answer is not that difficult.  It is more difficult to spot that the check must be done by the compiler.
+
+The [i]ptr[/i] was declared as [i]pointer to int[/i].  This way, it says that it point to the memory of the size that is capable to store the int value.  In other words, pointers in compiled languages are usually bound with some type.  And again, the type is used only for checking during compilation (hence the name [i]statically typed languages[/i]).  The information about the type disappears when generating the binary executable.  Anyway, the pointers are [i]typed[/i] in the compiled languages.
+
+What about untyped pointers?  Are they possible?  Is it possible to have a pointer to any type?  The short answer is yes.  The pointer variable itself requires always the same amount of memory (4 bytes on 32-bit OS, 8 bytes on 64-bit OS).  It simply stores the address.  The problem is that then the compiler does not know how big is the block of memory that is pointed to.  The pointer variable stores no knowledge about the size of the target.  The programmer have to get the information from somewhere else.  One of the possibilities is to store the size of the pointed structure at the beginning of the structure.
+
+What else?  NULL.  Or the similar name.  This is the special value that can be assigned a pointer variable of any type.  This means that you can assign it also, say, to the pointer to int.  This is the only pointer-value constant available.  It says: "the pointer points to nowhere."  Naturally, you cannot dereference such pointer.  The "nowhere" can never be accessed.  If you try, the screaming sound... kidding, not screaming actually... the error is somehow anounced.
+
+
+[subtitle]Drawing variables and pointers symbolically[/subtitle]
+
+Our brain likes thinking in abstractions.  "No boring numbers, please.  I tend to forget them."  We always solve (sub)problem in our head first, and only then we write the idea down.  We use our imagination.  If it is too much to keep it in our brain, we draw it on a paper...
+
+Also, we need some graphical abstraction [i]to be able to share[/i] what we mean with others.  We want to keep the picture as abstract as possible, as simple as possible, but not simpler than needed.
+
+IMAGE pointersSchematically
+
+The memory space for the variable is usually drawn as rectangle.  Again, a pointer variable is also a varible -- it needs its rectangle too.  However, we want the pointer value be more abstract.  (Recall what the brain have said about the numbers.  Anyway, we do not know the exact addresses and we do not care.)  The only important thing for us is that the value points to another memory space (hence [i]the pointer[/i]).  And the pointer should be pointed, right? ;)  To summarize, the pointer value is drawn as a fat dot with an arrow pointed to the other memory-space rectangle.  
+
+We also do not care how the NULL is implemented.  The only interesting feature is that it points to nowhere.  The "electric ground" mark is usually used.  That mark was very usuall and well known to those who worked with first computers -- not counting Charles Babbage (http://en.wikipedia.org/wiki/Babbage) and "World's First Computer Programmer" Ada Lovelace (http://en.wikipedia.org/wiki/Ada_Lovelace).
+
+Now, repeat "the pointers" until you really know what they are about.
+
+
+[subtitle]References[/subtitle]
+
+The term [i]references[/i] often causes confusion.  The main reason is that it can be used in different contexts.  
+
+The more abstract point of view is based on the idea that the reference value allows you to access some data (memory space) indirectly.  From that abstract point of view, the plain old pointers are also references.
+
+However, the terms references and pointers are often discussed together, and there are some differences emphasized between them in the case.  Usually, the references are said to be dereferenced automatically when used (unlike the pointers).
+
+The confusion has roots also in the fact that different programming languages think differently about references.  Some languages do not use the term references, some languages do not know pointers.  Some languages do not have any special syntax for references, and the fact of working with references internally may be completely hidden (this is also the case of Python -- see later).
+
+Back to the old compiled languages, here C++.
+
+IMAGE references
+
+The image shows the C++ syntax.  Ignore the syntactic details if you do not know the language.  What is important, the [i]ref[/i] variable must be initialized when declared.  The reason is that it must alway contain a reference to some already existing variable, i.e. to its allocated memory space.
+
+Here the [i]ref[/i] variable was located by the compiler/linker/loader at the address 75 (not important).  The important is that its memory space was filled with the address of the [i]var[/i] variable immediately.  The C++ restriction is that you cannot change the reference variable later.  Any usage of the [i]ref[/i] has the same effect as using the variable [i]var[/i].  
+
+IMAGE workingWithReferences
+
+The main difference from pointers is how the references look in the source code.  Once the reference variable is set, you can use it [i]as if it was another name for the pointed variable[/i].  In the example, the reference variable is named [i]ref[/i] which forces you to think this way about it.  But imagine if it was named [i]myVar[/i].  When using a reference variable, it looks the same as if you worked with a normal, simple variable.  It is because the [i]automatic dereference[/i] is done (by compiler, for you).  Anyway, the target memory space is still accessed indirectly.
+
+In other words, when you do not see the reference-variable declaration, you are not able to say if you work with a simple variable or (indirectly) with another variable.
+
+
+[subtitle]References for Python[/subtitle]
+
+Python uses references internally a lot.  Let's define the term [i]reference[/i] the way we need for explanation of the Python internals.
+
+IMAGE referencesSchematically
+
+We usually do not draw the references on the paper the same way as we do with pointer-based data structures.  Anyway, we can draw them the same way when explaining the interals.  Actually, the references are used in Python the very same way as pointers are used in other languages.  However, it is hidden from the programmer.  The reference value in Python (as elsewhere) needs always the same memory space to be stored (4 bytes on 32-bit systems, 8 bytes on 64-bit system).  
+
+However, Python is [i]a dynamic language[/i] where memory space for the objects is always allocated in runtime, and where the name of any variable is kept intentionally in a string form inside Python's internal data structures.
+
+Why to call them [i]references[/i] and not [i]pointers[/i]?  This is because you will find no explicit dereferencing when working with Python.  But that's not all!  There is one more indirection level when working with variables.  The topic will be discussed more in part 3.
+
+A side note: There is nothing like NULL value for Python references.  This would break the concept of references.  However, there is the single object named [i]None[/i] that plays the same role.  Whenever another object refers to [i]None[/i], it means that there is nothing more interesting there (if the fact is not interesting on its own).
+
+
+[subtitle]Topics to be discussed in the part 3[/subtitle]
+
+- Python as a dynamic language
+- everything in Python is an object
+- trivial Python built-in types
+- container built-in types
+- what is behind the assignment operation in Python
+- containers and references
+- Python approach variables (dict of name->reference)
+- where the types are stored in Python
