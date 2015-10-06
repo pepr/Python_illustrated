@@ -26,7 +26,7 @@ The reality does not need objects. It is our perception that tries to recognize 
 
 image::images/caveman.jpg[Give me that piece of meat, please. Or I will hit your skull with that stone.]
 
-[My sorry for using and modifying the copyrighted image of the http://www.stayfitbug.com/wp-content/uploads/2010/09/caveman-diet-300x200.jpg[caveman diet] from the stayfitbug.com article http://www.stayfitbug.com/the-fitness-bug/the-caveman-no-supplements-vs-the-21st-century-man-takes-supplements/[The Caveman (No supplements) vs The 21st Century Man (Takes supplements)] No, I did not ask them for permission (you know, the time pressure, etc.).  But yes, I will remove it if asked. On the other hand, isn't this mutually beneficial?]
+{empty}[My sorry for using and modifying the copyrighted image of the http://www.stayfitbug.com/wp-content/uploads/2010/09/caveman-diet-300x200.jpg[caveman diet] from the stayfitbug.com article http://www.stayfitbug.com/the-fitness-bug/the-caveman-no-supplements-vs-the-21st-century-man-takes-supplements/[The Caveman (No supplements) vs The 21st Century Man (Takes supplements)] No, I did not ask them for permission (you know, the time pressure, etc.).  But yes, I will remove it if asked. On the other hand, isn't this mutually beneficial?]
 
 Well, they are too complex and too distracting objects on the picture -- not good from a pedagogical point of view.  And you are capable of abstract thinking, right?
 
